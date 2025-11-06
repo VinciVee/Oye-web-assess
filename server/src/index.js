@@ -11,6 +11,7 @@ const routes = require('./routes/routes')
 
 // Custom debug logs
 const startlog = require('debug')('app:startup')
+const { dbPing } = require('./config/db')
 
 // Instance of express
 const app = express()
@@ -35,10 +36,17 @@ app.use((req, res, next) => {
   next(ApiError.notFound())
 })
 
-// ERRPR HANDLER: 400s & 500s ("everything else")
+// ERROR HANDLER: 400s & 500s ("everything else")
 app.use(apiErrorHandler)
 
 app.listen(
   config.port,
   () => console.log(`Server is running on port: ${config.port}`)
 )
+
+// dbPing.then(() => {
+//   app.listen(
+//     config.port,
+//     () => console.log(`Server is running on port: ${config.port}`)
+//   )
+// })

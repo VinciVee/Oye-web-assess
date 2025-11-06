@@ -1,4 +1,5 @@
 // CUSTOM ERROR UTILITY CLASS
+const debugError500 = require('debug')('app:error500')
 
 class ApiError {
   //  E1(b) CLASS PROPERTIES: Properties to be passed in as parameters/arguments
@@ -23,7 +24,7 @@ class ApiError {
   // [500] Internal Server Error
   // PARAMETERS: This takes two arguments - our custom message to the client + the error stack passed from the server/DB. We will need this for debugging, so we console.log this out!
   static internal(msg, err) {
-    console.error(err)
+    debugError500(err)
     return new ApiError(500, `Internal Server Error: ${msg}`)
   }
 }
