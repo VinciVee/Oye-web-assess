@@ -10,7 +10,8 @@ module.exports = () => {
   router.get('/users', AuthController.listUsers)
   // Only referencing listUsers - insteading of using listUsers()
 
-  // AUTH: Register / Sign up
+  // AUTH: Register / Sign up (POST): /api/auth/register
+  router.post('/register', AuthController.register)
 
 
   // AUTH: Login / Sign in
