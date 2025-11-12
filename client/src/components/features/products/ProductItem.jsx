@@ -1,4 +1,4 @@
-import TuButton from '../../common/TuButton';
+import OyeButton from '../../common/OyeButton';
 
 import * as styles from './ProductItem.css'
 
@@ -16,12 +16,12 @@ function ProductItem(props) {
       </div>
       <div>
         <h4 className={styles.productName}>{product.name}</h4>
-        <TuButton
+        <OyeButton
           key={product.id}
           product={product}
           onRemoveProduct={onRemoveProduct}
         >
-        </TuButton>
+        </OyeButton>
       </div>
     </div>
   )

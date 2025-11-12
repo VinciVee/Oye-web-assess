@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { getGitHubRestfulData } from '../../services/github'
 import ReposList from '../../components/features/apis/ReposList'
-import TuLoader from '../../components/common/TuLoader';
+import OyeLoader from '../../components/common/OyeLoader';
 
 const GithubMenu = () => {
   // HOOK: State for the API data, loading & error states
@@ -35,7 +35,7 @@ const GithubMenu = () => {
       const response = await getGitHubRestfulData();
       console.log(response);
 
-      // Access Object Properties to Find Data Array & Save to Variable 
+      // Access Object Properties to Find Data Array & Save to Variable
       const data = await response.data;
 
       // SUCCESS: Output needs to override data state
@@ -44,7 +44,7 @@ const GithubMenu = () => {
 
     } catch (err) {
       console.log(err)
-      setError(true); 
+      setError(true);
       toast.error("Internal Server Error");
     }
   }
@@ -63,7 +63,7 @@ const GithubMenu = () => {
   if (loading) {
     return (
       <Container className="text-center">
-        <TuLoader />
+        <OyeLoader />
       </Container>
     )
   }

@@ -1,7 +1,7 @@
-import * as styles from './TuButton.css'
+import * as styles from './OyeButton.css'
 import { Button } from "react-bootstrap";
 
-function TuButton(props) {
+function OyeButton(props) {
   const { onRemoveProduct, product } = props
 
   return (
@@ -14,4 +14,4 @@ function TuButton(props) {
   )
 }
 
-export default TuButton
+export default OyeButton

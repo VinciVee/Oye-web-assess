@@ -3,6 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 
 // Import pages
 import Home from './pages/Home';
+import Login from './pages/auth/Login';
+import SignUp from './pages/auth/SignUp';
+import Dashboard from './pages/auth/Dashboard';
 import ProductsPage from './pages/product/ProductsPage';
 import GithubMenu from './pages/apis/GithubMenu';
 import NotFound from './pages/NotFound';
@@ -18,6 +21,11 @@ function App() {
         <Route index element={<Home />} />
         {/* PRODUCTS */}
         <Route path='store/products' element={<ProductsPage />} />
+        {/* AUTHENTICATION */}
+        <Route path='login' element={<Login />} />
+        <Route path='signup' element={<SignUp />} />
+        <Route path='dashboard' element={<Dashboard />} />
+        {/* GITHUB */}
         <Route path='github' element={<GithubMenu />} />
         {/* ERROR PAGES */}
         <Route path="*" element={<NotFound />} />

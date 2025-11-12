@@ -16,7 +16,7 @@ export const app = style({
   flexDirection: "column",
   minHeight: "100vh",
   backgroundColor: vars.colors.primary,
-  fontFamily: vars.fonts.brand,
+  fontFamily: vars.fonts.body,
 })
 
 export const appContent = style({

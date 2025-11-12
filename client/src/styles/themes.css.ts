@@ -31,12 +31,12 @@ export const root = createGlobalTheme(":root", {
   },
   space: {
     none: '0',
-    '1x': '8px',
-    '2x': '16px',
-    '3x': '24px',
-    '4x': '32px',
-    '5x': '40px',
-    '6x': '48px',
+    '1x': '0.5rem',
+    '2x': '1rem',
+    '3x': '1.5rem',
+    '4x': '2rem',
+    '5x': '2.5rem',
+    '6x': '3rem',
   },
   fontSizes: {
     bodySmall: '0.83rem',
@@ -53,7 +53,7 @@ export const root = createGlobalTheme(":root", {
     regular: "400",
     medium: "500",
     semiBold: "600",
-    Bold: "700",
+    bold: "700",
   }
 })
 

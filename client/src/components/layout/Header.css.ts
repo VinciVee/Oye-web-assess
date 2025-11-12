@@ -50,5 +50,12 @@ export const navLink = style({
 
   ":hover": {
     color: vars.colors.brand
-  }
+  },
+})
+
+export const navMenu = style({
+  display: "flex",
+  placeItems: "start start",
+  columnGap: vars.space["2x"],
+  rowGap: vars.space.none,
 })

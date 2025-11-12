@@ -1,13 +1,13 @@
-import * as styles from './TuBox.css'
+import * as styles from './OyeBox.css'
 
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
-function TuBox(props) {
+function OyeBox(props) {
   const { title, text, shopPath } = props
 
   return (
-    <div className={styles.tuBox}>
+    <div className={styles.oyeBox}>
       <h1 className={styles.titleText}>{title}</h1>
         <p className={styles.bodyText}>{text}</p>
       <Link className={styles.buttonStyle} to={shopPath}>
@@ -17,4 +17,4 @@ function TuBox(props) {
   )
 }
 
-export default TuBox
+export default OyeBox

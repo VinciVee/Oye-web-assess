@@ -25,8 +25,11 @@ const Header = () => {
           <Nav className='me-auto'>
             <Nav.Link className={styles.navLink} as={Link} to='/store/products'>Products</Nav.Link>
           </Nav>
+          <Nav className={styles.navMenu}>
           {/* AUTH NAVLINKS */}
-          <Nav>
+            <Nav.Link className={styles.navLink} as={Link} to='/dashboard'>Dashboard</Nav.Link>
+            <Nav.Link className={styles.navLink} as={Link} to='/login'>Login</Nav.Link>
+            <Nav.Link className={styles.navLink} as={Link} to='/signup'>Sign Up</Nav.Link>
             <button><RiShoppingCartFill /></button>
           </Nav>
         </Navbar.Collapse>

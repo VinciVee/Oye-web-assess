@@ -1,17 +1,17 @@
 import { Fragment } from 'react';
 import Container from 'react-bootstrap/Container';
-import TuBox from '../components/common/TuBox';
+import OyeBox from '../components/common/OyeBox';
 
 const Home = () => {
   return (
     <Fragment>
       <Container>
-        <TuBox
+        <OyeBox
           title="A Gothic Themed Store"
           text="Browse Oye Oye&apos;s collection of medieval themed digital cards, backgrounds and icons"
           shopPath="/store/products"
         >
-        </TuBox>
+        </OyeBox>
       </Container>
     </Fragment>
   )

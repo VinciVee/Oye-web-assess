@@ -1,8 +1,8 @@
 import Spinner from 'react-bootstrap/Spinner'
 
-import * as styles from './TuLoader.css'
+import * as styles from './OyeLoader.css'
 
-function TuLoader() {
+function OyeLoader() {
   return (
     <div className={styles.loadingBox}>
       <Spinner
@@ -13,4 +13,4 @@ function TuLoader() {
   )
 }
 
-export default TuLoader
+export default OyeLoader
