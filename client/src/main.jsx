@@ -4,6 +4,7 @@ import App from './App.jsx'
 
 // Router
 import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext.jsx';
 
 // CSS Reset
 // Removes default styling on HTML elements
@@ -19,7 +20,9 @@ import 'react-toastify/dist/ReactToastify.css';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </BrowserRouter>
   </StrictMode>,
 )

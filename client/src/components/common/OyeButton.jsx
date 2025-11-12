@@ -1,17 +1,28 @@
+import PropTypes from 'prop-types'
 import * as styles from './OyeButton.css'
-import { Button } from "react-bootstrap";
+import { Button } from 'react-bootstrap'
 
-function OyeButton(props) {
-  const { onRemoveProduct, product } = props
-
+const OyeButton = ({ children, loadingState, onClick, outline, navbar }) => {
   return (
     <Button
-      onClick={() => onRemoveProduct(product.id)}
-      variant="outline-danger"
-      size="sm"
-      type="button"
-    >Remove from Cart</Button>
+      className={styles.button}
+      type={onClick ? "button" : "submit"}
+      onClick={onClick}
+      disabled={loadingState ? 1 : 0}
+      outline={outline ? 1 : 0}
+      navbar={navbar ? 1 : 0}
+    >
+      {children}
+    </Button>
   )
+}
+
+OyeButton.propTypes = {
+  children: PropTypes.any,
+  loadingState: PropTypes.bool,
+  outline: PropTypes.bool,
+  navbar: PropTypes.bool,
+  type: PropTypes.string,
 }
 
 export default OyeButton

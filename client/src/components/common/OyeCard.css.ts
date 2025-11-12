@@ -30,5 +30,5 @@ export const cardTitle = style({
   color: vars.colors.brand,
   paddingBottom: "1rem",
   fontSize: "2em",
-  fontWeight: vars.fontWeights.bold
+  fontWeight: vars.fontWeights.semiBold
 })

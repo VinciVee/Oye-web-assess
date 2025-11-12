@@ -20,15 +20,15 @@ globalStyle(`${twinBox} h1`, {
   margin: 0,
   padding: vars.space['4x'],
   borderRight: `2px solid ${vars.colors.grey300}`,
-  fontSize: vars.fontSizes['4x'],
-  fontWeight: vars.fontWeights.normal,
+  fontSize: vars.fontSizes.title4,
+  fontWeight: vars.fontWeights.regular,
   color: vars.colors.complementary,
 })
 
 globalStyle(`${twinBox} a`, {
   padding: vars.space['4x'],
-  fontSize: vars.fontSizes['4x'],
-  fontWeight: vars.fontWeights.normal,
+  fontSize: vars.fontSizes.title4,
+  fontWeight: vars.fontWeights.regular,
   color: vars.colors.complementary,
   textDecoration: "none",
 })
