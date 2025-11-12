@@ -17,6 +17,7 @@ try {
   // Call the database with OUR options
   admin.initializeApp(firebaseAppOptions)
   const db = admin.firestore()
+  //db.settings({ preferRest: true })
   const bucket = admin.storage().bucket() //storage bucket used to store media files
 
   // "Ping test" Function (only use in development)

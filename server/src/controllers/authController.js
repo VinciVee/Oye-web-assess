@@ -2,6 +2,8 @@ const { db } = require('../config/db')
 const ApiError = require('../utilities/ApiError')
 const { findUser, hashPassword, userDetailsToJSON, jwtSignUser } = require('../utilities/authServices')
 
+const bcrypt = require('bcrypt')
+
 module.exports = {
   // LIST ALL USERS
   async listUsers(req, res, next){
@@ -66,4 +68,34 @@ module.exports = {
   },
 
   // LOGIN USERS
+  async login(req, res, next){
+    // Save form data to local vars
+    const { email, password } = req.body
+
+    // Check user is saved to the db already [AUTH-1]
+    const userMatch = await findUser(email)
+    if(!userMatch.length){ // [] true / "" false
+      return next(ApiError.badRequest('Incorrect email or password (DEBUG - email)'))
+    }
+
+    // Check that password matches the db user pwd [AUTH-2]
+    const passwordMatch = await bcrypt.compare(
+      password,
+      userMatch[0].password
+    )
+    if(!passwordMatch){
+      return next(ApiError.badRequest('Incorrect email or password (DEBUG - pwd)'))
+    }
+
+    // Response & minting the token
+    console.log(`Success - user created: ${userMatch[0].id}`)
+
+    // Structure the data payload to be saved within the token
+    const userJSON = await userDetailsToJSON(userMatch[0].id)
+
+    // Response: Send back a token on SUCCESS------------------
+    res.send({
+      token: jwtSignUser(userJSON) // Minting the token
+    })
+  }
 }

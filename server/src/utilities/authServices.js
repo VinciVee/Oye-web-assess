@@ -20,6 +20,7 @@ module.exports = {
         id: doc.id,
         username: doc.data().username,
         email: doc.data().email,
+        password: doc.data().password,
         isAdmin: doc.data().isAdmin
       })
     })

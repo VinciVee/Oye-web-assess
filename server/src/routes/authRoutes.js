@@ -14,8 +14,8 @@ module.exports = () => {
   router.post('/register', AuthController.register)
 
 
-  // AUTH: Login / Sign in
-
+  // AUTH: Login / Sign in (POST) Route: /api/auth/log
+  router.post('/login', AuthController.login)
 
   return router
 }
