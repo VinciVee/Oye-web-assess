@@ -1,8 +1,6 @@
 const { db } = require('../config/db')
 const ApiError = require('../utilities/ApiError')
-const { findUser, hashPassword, userDetailsToJSON, jwtSignUser } = require('../utilities/authServices')
-
-const bcrypt = require('bcrypt')
+const { findUser, hashPassword, userDetailsToJSON, jwtSignUser, comparePassword } = require('../utilities/authServices')
 
 module.exports = {
   // LIST ALL USERS
@@ -79,10 +77,8 @@ module.exports = {
     }
 
     // Check that password matches the db user pwd [AUTH-2]
-    const passwordMatch = await bcrypt.compare(
-      password,
-      userMatch[0].password
-    )
+    const passwordMatch = await comparePassword(userMatch[0].password, password)
+
     if(!passwordMatch){
       return next(ApiError.badRequest('Incorrect email or password (DEBUG - pwd)'))
     }

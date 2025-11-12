@@ -66,4 +66,12 @@ module.exports = {
 
     return token
   },
+
+  async comparePassword(dbPassword, password){
+    const passwordMatch = await bcrypt.compare(
+      password,
+      dbPassword
+    )
+    return passwordMatch
+  }
 }
