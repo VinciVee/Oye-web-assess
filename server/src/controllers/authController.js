@@ -84,7 +84,7 @@ module.exports = {
     }
 
     // Response & minting the token
-    console.log(`Success - user created: ${userMatch[0].id}`)
+    console.log(`Success - user logged in: ${userMatch[0].id}`)
 
     // Structure the data payload to be saved within the token
     const userJSON = await userDetailsToJSON(userMatch[0].id)

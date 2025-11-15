@@ -6,5 +6,10 @@ module.exports = {
   },
   authentication: {
     jwtSecret: process.env.JWT_SECRET
-  }
+  },
+  // Approved CORS whitelist
+  corsAllowedOptions: [
+    process.env.CORS_WHITELIST_1,
+    process.env.CORS_WHITELIST_2,
+  ]
 }

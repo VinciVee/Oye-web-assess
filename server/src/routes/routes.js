@@ -10,7 +10,7 @@ module.exports = () => {
   // HOME/TEST Endpoint
   // '/' - route path for server
   router.get('/', (req, res, next) => { // part of express tool belt
-    res.send("Welcome to Oye` Oye` 📣")
+    res.send("Welcome to Oyez` Oyez` 📣")
   })
 
   // AUTH ROUTES: /api/auth

@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 const AuthController = require('../controllers/authController')
+const AuthPolicy = require('../policies/authPolicy')
 
 module.exports = () => {
   // AUTH TEST ROUTE: Lists all users (GET): /api/auth/users
@@ -11,11 +12,15 @@ module.exports = () => {
   // Only referencing listUsers - insteading of using listUsers()
 
   // AUTH: Register / Sign up (POST): /api/auth/register
-  router.post('/register', AuthController.register)
+  router.post('/register',
+    AuthPolicy.validateAuth,
+    AuthController.register)
 
 
   // AUTH: Login / Sign in (POST) Route: /api/auth/log
-  router.post('/login', AuthController.login)
+  router.post('/login',
+    AuthPolicy.validateAuth,
+    AuthController.login)
 
   return router
 }

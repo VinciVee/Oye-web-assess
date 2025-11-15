@@ -2,6 +2,9 @@
 const express = require('express') // common js - require('')
 require('dotenv').config()
 const morgan = require('morgan')
+const helmet = require('helmet')
+const cors = require('cors')
+const corsOptions = require('./config/corsOptions')
 
 // Import config / routes
 const config = require('./config/config')
@@ -17,6 +20,12 @@ const { dbPing } = require('./config/db')
 const app = express()
 
 // ---------- MIDDLEWARE ----------
+app.use(helmet())
+app.use(cors(corsOptions)) //cors("*") - enable pre-flight across-the-board
+
+//  git config --global user.name "Your Name"
+//  git config --global user.email you@example.com
+
 // Default middleware for parsing
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -39,14 +48,14 @@ app.use((req, res, next) => {
 // ERROR HANDLER: 400s & 500s ("everything else")
 app.use(apiErrorHandler)
 
-app.listen(
-  config.port,
-  () => console.log(`Server is running on port: ${config.port}`)
-)
+// app.listen(
+//   config.port,
+//   () => console.log(`Server is running on port: ${config.port}`)
+// )
 
-// dbPing.then(() => {
-//   app.listen(
-//     config.port,
-//     () => console.log(`Server is running on port: ${config.port}`)
-//   )
-// })
+dbPing.then(() => {
+  app.listen(
+    config.port,
+    () => console.log(`Server is running on port: ${config.port}`)
+  )
+})
