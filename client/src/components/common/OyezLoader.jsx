@@ -1,8 +1,8 @@
 import Spinner from 'react-bootstrap/Spinner'
 
-import * as styles from './OyeLoader.css'
+import * as styles from './OyezLoader.css'
 
-function OyeLoader() {
+function OyezLoader() {
   return (
     <div className={styles.loadingBox}>
       <Spinner
@@ -13,4 +13,4 @@ function OyeLoader() {
   )
 }
 
-export default OyeLoader
+export default OyezLoader

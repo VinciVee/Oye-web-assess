@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "../../styles/themes.css";
 
-export const oyeBox = style({
+export const oyezBox = style({
   display: "flex",
   flexDirection: "column",
   justifyItems: "center",

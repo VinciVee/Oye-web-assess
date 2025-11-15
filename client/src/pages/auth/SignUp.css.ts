@@ -8,6 +8,10 @@ export const userNav = style({
   fontStyle: "italic",
 })
 
+// export const textBox = style({
+//   height: "2rem",
+// })
+
 globalStyle(`${userNav} a`, {
   textDecoration: "none",
   color: vars.colors.brand,

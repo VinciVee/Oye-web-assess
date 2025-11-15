@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { getGitHubRestfulData } from '../../services/github'
 import ReposList from '../../components/features/apis/ReposList'
-import OyeLoader from '../../components/common/OyeLoader';
+import OyezLoader from '../../components/common/OyezLoader';
 
 const GithubMenu = () => {
   // HOOK: State for the API data, loading & error states
@@ -63,7 +63,7 @@ const GithubMenu = () => {
   if (loading) {
     return (
       <Container className="text-center">
-        <OyeLoader />
+        <OyezLoader />
       </Container>
     )
   }

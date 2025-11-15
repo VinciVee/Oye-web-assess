@@ -42,9 +42,9 @@ As discussed, we will briefly note/update our utilities that we will need for ou
 **STEPS:**
 
   - **(a) LAYOUT OUTLET:** Bring in the `<Outlet>` into `Layout` & replace `props.children` (*make sure to import from RRD*)
-  
+
   - **(b) RENDER LAYOUT "ROUTE":** Call a parent `Route`, with a root path BUT renders the `Layout` component.  *This will be a standard open & close tag.*
-  
+
   - **(c) NESTED MAIN ROUTE:** Wrap ALL other `Route`s within the Layout Route.  To ensure our `Home` page still renders on `/`, replace the path with `index`.  This ensures that it will take the `Outlets` place when rendered (*bit confusing!*)
 
     - **CHANGE:** We also updated a few routes such as `store/products` - make sure to reflect in `Header`!
@@ -68,16 +68,16 @@ As discussed, we will briefly note/update our utilities that we will need for ou
 **SETUP:** React-Toast notifications are effectively built of three main parts:
 
   - **(a) Toast Container:** This will be the popup container that appears on our page
-  
+
     - **ROOT COMPONENT:** We call this in our `Layout` above the `Header` so it appears at the top of the page when called by the toast method
-    
+
     - **PROPS:** We can adapt styling/features of the popup, by passing in props as detailed in the documentation (*see examples provided or check docs!*)
 
   - **(b) Toast Stylesheet:** We need to give access to toast styling, and pass this stylesheet into index.js like our other CSS
 
     - **KEY LINE:** `import react-toastify/dist/ReactToastify.css` in `main.jsx` below bootstrap stylesheet, but above `index.css`;
 
-  - **(c) Toast Method:** This method will call the popup to appear & pass in text into the container 
+  - **(c) Toast Method:** This method will call the popup to appear & pass in text into the container
 
       - **GITHUB MENU ERROR**: We call this method in our catch(err) for our `fetchData` method, inside our `useEffect` hook, in `GithubMenu.jsx`.  We will just pass back a catch-all text for any error
 

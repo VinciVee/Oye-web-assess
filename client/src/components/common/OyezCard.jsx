@@ -1,6 +1,6 @@
-import * as styles from './OyeCard.css'
+import * as styles from './OyezCard.css'
 
-const OyeCard = ({ title, authform, children }) => {
+const OyezCard = ({ title, authform, children }) => {
   return (
     <div className={styles.container}>
       <div className={`${styles.leadCard} ${authform ? styles.authForm : styles.generalForm}`}>
@@ -11,4 +11,4 @@ const OyeCard = ({ title, authform, children }) => {
   )
 }
 
-export default OyeCard
+export default OyezCard

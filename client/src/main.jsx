@@ -1,10 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
 
 // Router
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext.jsx';
 
 // CSS Reset
 // Removes default styling on HTML elements
@@ -16,6 +14,11 @@ import './styles/resets.css.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 // import './styles/index.css'
+
+//
+import App from './App.jsx'
+import { AuthProvider } from './contexts/AuthContext.jsx';
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

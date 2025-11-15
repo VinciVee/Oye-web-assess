@@ -7,8 +7,8 @@ import axios from 'axios'
 
 // Local Modules
 import * as styles from './SignUp.css'
-import OyeCard from '../../components/common/OyeCard'
-import OyeButton from "../../components/common/OyeButton"
+import OyezCard from '../../components/common/OyezCard'
+import OyezButton from "../../components/common/OyezButton"
 import { useAuth } from "../../contexts/AuthContext"
 
 function SignUp() {
@@ -66,12 +66,12 @@ function SignUp() {
   }
 
   return (
-    <OyeCard title="Sign Up" authform>
+    <OyezCard title="Sign Up" authform>
       <Form onSubmit={handleSubmit}>
         {/* USERNAME */}
         <FloatingLabel
           controlId="username"
-          label="Username"
+          label="Username*"
           className="mb-3" >
             <Form.Control
               type="text"
@@ -84,7 +84,7 @@ function SignUp() {
         {/* EMAIL */}
         <FloatingLabel
           controlId="email"
-          label="Email address"
+          label="Email address*"
           className="mb-3" >
             <Form.Control
               type="email"
@@ -97,7 +97,7 @@ function SignUp() {
         {/* PASSWORD */}
         <FloatingLabel
           controlId="password"
-          label="Password"
+          label="Password*"
           className="mb-3" >
             <Form.Control
               type="password"
@@ -110,25 +110,25 @@ function SignUp() {
         {/* PASSWORD CONFIRMATION */}
         <FloatingLabel
           controlId="password-confirm"
-          label="Password Confirmation"
+          label="Password Confirmation*"
           className="mb-3">
             <Form.Control
               type="password"
-              placeholder="Confirm Password"
+              placeholder="Password Confirmation"
               ref={passwordConfirmRef} />
         </FloatingLabel>
 
         {/* SUBMIT BUTTON */}
-        <OyeButton loadingState={loading}>
+        <OyezButton loadingState={loading}>
           {loading ? <Spinner animation="border" variant="light" /> : 'Submit'}
-        </OyeButton>
+        </OyezButton>
       </Form>
       <div className={styles.userNav}>
         <span>Already a member? &nbsp;
           <Link to="/login">Login Here</Link>
         </span>
       </div>
-    </OyeCard>
+    </OyezCard>
   )
 }
 

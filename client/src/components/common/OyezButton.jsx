@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
-import * as styles from './OyeButton.css'
+import * as styles from './OyezButton.css'
 import { Button } from 'react-bootstrap'
 
-const OyeButton = ({ children, loadingState, onClick, outline, navbar }) => {
+const OyezButton = ({ children, loadingState, onClick, outline, navbar }) => {
   return (
     <Button
       className={styles.button}
@@ -17,7 +17,7 @@ const OyeButton = ({ children, loadingState, onClick, outline, navbar }) => {
   )
 }
 
-OyeButton.propTypes = {
+OyezButton.propTypes = {
   children: PropTypes.any,
   loadingState: PropTypes.bool,
   outline: PropTypes.bool,
@@ -25,4 +25,4 @@ OyeButton.propTypes = {
   type: PropTypes.string,
 }
 
-export default OyeButton
+export default OyezButton

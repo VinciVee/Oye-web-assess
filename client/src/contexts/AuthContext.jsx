@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, createContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
 
 // Create the context
 const AuthContext = createContext()
@@ -22,26 +23,30 @@ export function AuthProvider({ children }){
   }, [])
 
   // 1. Login/Register funciotn
-  const loginSaveUser = async (user) => {
+  const loginSaveUser = async (data) => {
+    const { token } = data
+    localStorage.setItem("token", token)
     // "user" is the property
-    localStorage.setItem("user", JSON.stringify(user)) // localStorage is browser memory - maintains memory between routes
-    setUser(user)
+    // localStorage.setItem("user", JSON.stringify(data)) // localStorage is browser memory - maintains memory between routes
+    setUser(jwtDecode(token))
   }
 
   // 2. Check whether user is logged in
   function getCurrentUser(){
     try {
-      let savedData = localStorage.getItem("user")
-      savedData = JSON.parse(savedData)
-      return savedData
+      const token = localStorage.getItem("token")
+      const savedUser = jwtDecode(token)
+      return savedUser
+
     } catch(error){
+      console.log(`Error from getCurrentUser: ${error}`)
       return null
     }
   }
 
   // 3. Logout function
   const logout = () => {
-    localStorage.removeItem("user")
+    localStorage.removeItem("token")
     setUser(null)
     navigate('/login')
   }

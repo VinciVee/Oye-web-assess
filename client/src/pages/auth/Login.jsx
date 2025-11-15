@@ -7,8 +7,8 @@ import axios from 'axios'
 
 // Local Modules
 import * as styles from './Login.css'
-import OyeCard from '../../components/common/OyeCard'
-import OyeButton from "../../components/common/OyeButton"
+import OyezCard from '../../components/common/OyezCard'
+import OyezButton from "../../components/common/OyezButton"
 import { useAuth } from "../../contexts/AuthContext"
 
 function Login() {
@@ -53,12 +53,12 @@ function Login() {
   }
 
   return (
-    <OyeCard title="Log in" authform>
+    <OyezCard title="Log in" authform>
       <Form onSubmit={handleSubmit}>
         {/* EMAIL */}
         <FloatingLabel
           controlId="email"
-          label="Email address"
+          label="Email address*"
           className="mb-3" >
             <Form.Control
               type="email"
@@ -71,7 +71,7 @@ function Login() {
         {/* PASSWORD */}
         <FloatingLabel
           controlId="password"
-          label="Password"
+          label="Password*"
           className="mb-3" >
             <Form.Control
               type="password"
@@ -82,16 +82,16 @@ function Login() {
         </FloatingLabel>
 
         {/* SUBMIT BUTTON */}
-        <OyeButton loadingState={loading}>
+        <OyezButton loadingState={loading}>
           {loading ? <Spinner animation="border" variant="light" /> : 'Submit'}
-        </OyeButton>
+        </OyezButton>
       </Form>
       <div className={styles.userNav}>
         <span>Not a member? &nbsp;
           <Link to="/signup">Sign Up Here</Link>
         </span>
       </div>
-    </OyeCard>
+    </OyezCard>
   )
 }
 
