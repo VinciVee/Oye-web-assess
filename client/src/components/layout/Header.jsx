@@ -1,7 +1,7 @@
 //
 import * as styles from './Header.css';
 import logoImg from '../../assets/images/oyez-oyez-logo.svg'
-import { useAuth } from '../../contexts/AuthContext';
+import useAuth from "../../hooks/useAuth"
 
 // Import Bootstrap modules
 import { Link } from 'react-router-dom';

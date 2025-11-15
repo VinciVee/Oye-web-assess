@@ -1,6 +1,6 @@
 //
 import { Outlet, Navigate, useLocation } from "react-router-dom"
-import { useAuth } from "../../contexts/AuthContext"
+import useAuth from "../../hooks/useAuth"
 import { toast } from "react-toastify" // TO DO: build a toast on redirect as well
 
 function PrivateRoutes() {

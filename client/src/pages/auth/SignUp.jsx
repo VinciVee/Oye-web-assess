@@ -3,13 +3,13 @@ import { Link, useNavigate } from "react-router-dom"
 import { FloatingLabel, Form, Button } from "react-bootstrap"
 import Spinner from "react-bootstrap/Spinner"
 import { toast } from 'react-toastify'
-import axios from 'axios'
 
 // Local Modules
 import * as styles from './SignUp.css'
 import OyezCard from '../../components/common/OyezCard'
 import OyezButton from "../../components/common/OyezButton"
-import { useAuth } from "../../contexts/AuthContext"
+import useAuth from "../../hooks/useAuth"
+import authService from "../../services/authService"
 
 function SignUp() {
   const { loginSaveUser } = useAuth()
@@ -45,7 +45,7 @@ function SignUp() {
     // Client-side validation (wrong pwds)
     if(password != passwordConfirmRef.current.value){
       // If password DOES NOT match passwordConf., trigger this
-      toast.error("Passwords do not match")
+      toast.warn("Passwords do not match")
       setLoading(false)
 
       return
@@ -53,14 +53,11 @@ function SignUp() {
 
     // API call
     try {
-      const response = await axios.post('/api/auth/register', user)
-      console.log(response.data)
+      const response = await authService.register(user)
       loginSaveUser(response.data)
       navigate('/dashboard')
 
     } catch(err){
-      console.log(err?.response) // optional chaining '?'
-      toast.error(err.response.data)
       setTimeout(() => {setLoading(false), 1000})
     }
   }

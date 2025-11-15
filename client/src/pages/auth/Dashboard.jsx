@@ -1,15 +1,21 @@
-import { useAuth } from "../../contexts/AuthContext"
+import useAuth from "../../hooks/useAuth"
 import OyezCard from "../../components/common/OyezCard"
-import React from "react"
+import OyezLoader from "../../components/common/OyezLoader"
 
 function Dashboard() {
-  const { user } = useAuth()
-  //const { username, email, isAdmin } = user
+  const { user, userLoading } = useAuth()
 
-  // React.useEffect(() => {
-  //   const { username, email, isAdmin } = getCurrentUser()
-  //   return user
-  // }, [])
+  if (userLoading) {
+    return <OyezLoader />
+  }
+
+  if (!user) {
+    return (
+      <OyezCard title="Profile" authform>
+        <h4>Please log in to view your profile.</h4>
+      </OyezCard>
+    )
+  }
 
   return (
     <OyezCard title="Profile" authform>

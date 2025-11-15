@@ -2,14 +2,13 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { FloatingLabel, Form, Button } from "react-bootstrap"
 import Spinner from "react-bootstrap/Spinner"
-import { toast } from 'react-toastify'
-import axios from 'axios'
 
 // Local Modules
 import * as styles from './Login.css'
 import OyezCard from '../../components/common/OyezCard'
 import OyezButton from "../../components/common/OyezButton"
-import { useAuth } from "../../contexts/AuthContext"
+import useAuth from "../../hooks/useAuth"
+import authService from "../../services/authService"
 
 function Login() {
   const { loginSaveUser} = useAuth()
@@ -40,14 +39,11 @@ function Login() {
 
     // API call
     try {
-      const response = await axios.post('/api/auth/login', user)
-      console.log(response.data)
+      const response = await authService.login(user)
       loginSaveUser(response.data)
       navigate('/dashboard')
 
     } catch(err){
-      console.log(err?.response) // optional chaining '?'
-      toast.error(err.response.data)
       setTimeout(() => {setLoading(false), 1000})
     }
   }

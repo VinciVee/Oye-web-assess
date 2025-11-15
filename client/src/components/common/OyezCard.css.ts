@@ -10,10 +10,11 @@ export const authForm = style({
 })
 
 export const container = style({
-  marginTop: "1rem",
+  marginTop: "0.1rem",
   minHeight: "70vh",
   display: "flex",
-  flexDirection: "column"
+  flexDirection: "column",
+  placeItems: "start center",
 })
 
 export const leadCard = style({
