@@ -5,26 +5,31 @@ const { findUser, hashPassword, userDetailsToJSON, jwtSignUser, comparePassword 
 module.exports = {
   // LIST ALL USERS
   async listUsers(req, res, next){
-    // Store doc query
-    const usersRef = db.collection('users')
-    const snapshot = await usersRef.get()
+    try {
+      // Store doc query
+      const usersRef = db.collection('users')
+      const snapshot = await usersRef.get()
 
-    // [400 ERROR] Check for no documents
-    if(snapshot.empty){
-      return next(ApiError.badRequest('No users exist for this collection'))
-    }
+      // [400 ERROR] Check for no documents
+      if(snapshot.empty){
+        return next(ApiError.badRequest('No users exist in this collection'))
+      }
 
-    // Structure the snapshot so it returns valid array of docs
-    let users = []
-    snapshot.forEach(doc => {
-      users.push({
-        id: doc.id,
-        username: doc.data().username,
-        email: doc.data().email,
-        isAdmin: doc.data().isAdmin
+      // Structure the snapshot so it returns valid array of docs
+      let users = []
+      snapshot.forEach(doc => {
+        users.push({
+          id: doc.id,
+          username: doc.data().username,
+          email: doc.data().email,
+          isAdmin: doc.data().isAdmin
+        })
       })
-    })
-    res.send(users)
+      res.send(users)
+
+    } catch (err) {
+      return next(ApiError.internal('Internal error: users could not be listed', err))
+    }
   },
 
   // REGISTER USERS

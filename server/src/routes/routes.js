@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 const authRoutes = require('./authRoutes')
+const productRoutes = require('./productRoutes')
 
 // Endpoints for "/" path
 module.exports = () => {
@@ -16,6 +17,9 @@ module.exports = () => {
   // AUTH ROUTES: /api/auth
   // When importing a route, it needs to be consumed as a function - Router requirement
   router.use('/auth', authRoutes())
+
+  // PRODUCT ROUTES: /api/product
+  router.use('/products', productRoutes())
 
   return router
 }

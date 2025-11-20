@@ -1,6 +1,5 @@
 const express = require('express')
-// Router instance of app (express)
-// Hook into app instance - add-on
+// Router instance of app (express) - hook into app instance - add-on
 const router = express.Router()
 
 const AuthController = require('../controllers/authController')
