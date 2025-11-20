@@ -11,5 +11,6 @@ module.exports = {
   corsAllowedOptions: [
     process.env.CORS_WHITELIST_1,
     process.env.CORS_WHITELIST_2,
+    process.env.CORS_WHITELIST_3,
   ]
 }

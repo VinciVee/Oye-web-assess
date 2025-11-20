@@ -12,7 +12,7 @@ module.exports = {
 
       // [400 ERROR] Check for no documents
       if(snapshot.empty){
-        return next(ApiError.badRequest('No users exist in this collection'))
+        return next(ApiError.badRequest('The documents you were looking for do not exist'))
       }
 
       // Structure the snapshot so it returns valid array of docs
