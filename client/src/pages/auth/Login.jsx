@@ -5,13 +5,13 @@ import Spinner from "react-bootstrap/Spinner"
 
 // Local Modules
 import * as styles from './Login.css'
-import OyezCard from '../../components/common/OyezCard'
+import OyezForm from '../../components/common/OyezForm'
 import OyezButton from "../../components/common/OyezButton"
 import useAuth from "../../hooks/useAuth"
 import authService from "../../services/authService"
 
 function Login() {
-  const { loginSaveUser} = useAuth()
+  const { loginSaveUser } = useAuth()
   // Link is used in html for clickable items that changes the view (or navigates to a different page) - without reloading the page
   // useNavigate is used programmatically (in code) for redirection
   const navigate = useNavigate()
@@ -49,7 +49,7 @@ function Login() {
   }
 
   return (
-    <OyezCard title="Log in" authform>
+    <OyezForm title="Log in" authform>
       <Form onSubmit={handleSubmit}>
         {/* EMAIL */}
         <FloatingLabel
@@ -87,7 +87,7 @@ function Login() {
           <Link to="/signup">Sign Up Here</Link>
         </span>
       </div>
-    </OyezCard>
+    </OyezForm>
   )
 }
 

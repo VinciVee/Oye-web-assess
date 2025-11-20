@@ -7,7 +7,7 @@ function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <span>&copy; {getCurrentYear()} Timbertop United</span>
+      <span>&copy; {getCurrentYear()} Oyez Oyez</span>
     </footer>
   )
 }

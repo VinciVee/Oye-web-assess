@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 // Local Modules
 import * as styles from './SignUp.css'
-import OyezCard from '../../components/common/OyezCard'
+import OyezForm from '../../components/common/OyezForm'
 import OyezButton from "../../components/common/OyezButton"
 import useAuth from "../../hooks/useAuth"
 import authService from "../../services/authService"
@@ -63,7 +63,7 @@ function SignUp() {
   }
 
   return (
-    <OyezCard title="Sign Up" authform>
+    <OyezForm title="Sign Up" authform>
       <Form onSubmit={handleSubmit}>
         {/* USERNAME */}
         <FloatingLabel
@@ -125,7 +125,7 @@ function SignUp() {
           <Link to="/login">Login Here</Link>
         </span>
       </div>
-    </OyezCard>
+    </OyezForm>
   )
 }
 

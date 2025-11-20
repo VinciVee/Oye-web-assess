@@ -1,5 +1,5 @@
 import useAuth from "../../hooks/useAuth"
-import OyezCard from "../../components/common/OyezCard"
+import OyezForm from "../../components/common/OyezForm"
 import OyezLoader from "../../components/common/OyezLoader"
 
 function Dashboard() {
@@ -11,17 +11,17 @@ function Dashboard() {
 
   if (!user) {
     return (
-      <OyezCard title="Profile" authform>
+      <OyezForm title="Profile" authform>
         <h4>Please log in to view your profile.</h4>
-      </OyezCard>
+      </OyezForm>
     )
   }
 
   return (
-    <OyezCard title="Profile" authform>
+    <OyezForm title="Profile" authform>
       <p>{user.username}</p>
       {user.isAdmin && <p style={{ color: "darkblue "}}>You are admin!</p>}
-    </OyezCard>
+    </OyezForm>
   )
 }
 

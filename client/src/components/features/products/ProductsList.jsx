@@ -3,20 +3,22 @@ import ProductItem from "./ProductItem"
 
 import * as styles from './ProductList.css'
 
-function ProductsList(props) {
-  const { products, onAddProduct, onRemoveProduct } = props;
+function ProductsList({ products }) {
+
   return (
-    <div>
-      <div className="my-3">
-        <Button onClick={() => onAddProduct("NEW!")} variant="info" type="button">Add to Cart</Button>
-      </div>
+    <div className={styles.gridContainer}>
       <div className={styles.productList}>
-        {products.length === 0 && <p>Empty cart...</p>}
         {products.length > 0 && products.map(product =>
           <ProductItem
             key={product.id}
-            product={product}
-            onRemoveProduct={onRemoveProduct}
+            id={product.id}
+            name={product.name}
+            image={product.image}
+            description={product.description}
+            price={product.price}
+            category={product.category}
+            onSale={product.onSale}
+            isAvailable={product.isAvailable}
           />
         )}
       </div>

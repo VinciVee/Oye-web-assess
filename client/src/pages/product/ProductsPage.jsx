@@ -1,42 +1,62 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProductsList from "../../components/features/products/ProductsList"
+
+import productService from '../../services/productService';
 import Container from "react-bootstrap/Container";
+import OyezLoader from '../../components/common/OyezLoader';
 
 function ProductsPage() {
   // PRODUCTS STATE
-  const [products, setProducts] = useState([
-    { id: 1, name: "product1", image: "https://placehold.co/150x200/lightgrey/darkgrey?font=roboto&text=Product" },
-    { id: 2, name: "product2", image: "https://placehold.co/150x200/lightgrey/darkgrey?font=roboto&text=Product" },
-    { id: 3, name: "product3", image: "https://placehold.co/150x200/lightgrey/darkgrey?font=roboto&text=Product" },
-    { id: 4, name: "product4", image: "https://placehold.co/150x200/lightgrey/darkgrey?font=roboto&text=Product" },
-  ])
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
+  // Fetch products function
+  async function fetchProducts(){
+    try {
+      const response = await productService.getAll()
+      const data = await response.data
+      // console.log(data)
+      setProducts(data)
+
+    } catch(err) {
+      setError(true)
+
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // CONDITIONAL LOAD: ERROR
+  if (error) {
+    return (
+      <Container className="text-center mt-4">
+        <p>Error loading page ...</p>
+        {/* <Link to="/">Return to Home page</Link> */}
+      </Container>
+    )
+  }
+
+  // CONDITIONAL LOAD: LOADING
+  if (loading) {
+    return (
+      <Container className="text-center">
+        <OyezLoader />
+      </Container>
+    )
+  }
 
   // PRODUCTS FUNCTIONS
-  function handleAddProduct(name){
-    const newProduct = {
-      id: crypto.randomUUID(),
-      name: name,
-      image: `https://placehold.co/100x100/pink/darkblue?font=montserrat&text=${name}!`
-    }
-    setProducts(currentProducts => {
-      return [...currentProducts, newProduct]
-    })
-    console.log("Product added to cart!")
-  }
-
-  function handleRemoveProduct(id){
-    console.log(id)
-    const updatedProducts = products.filter(product => product.id !== id)
-    setProducts(updatedProducts)
-  }
 
   return (
     <Container>
-      <ProductsList
-        products={products}
-        onAddProduct={handleAddProduct}
-        onRemoveProduct={handleRemoveProduct}
-      />
+      <h1>Oyez Oyez Store</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates obcaecati dolore deleniti ex ipsa laudantium, mollitia laborum saepe aut autem.</p>
+      <ProductsList products={products} />
     </Container>
   )
 }

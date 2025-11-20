@@ -20,8 +20,12 @@ function App() {
       {/* MAIN LAYOUT WRAPPER & ROUTED CHILDREN */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        {/* PRODUCTS */}
-        <Route path='store/products' element={<ProductsPage />} />
+
+        {/* PRODUCTS: /store/... */}
+        <Route path="store">
+          <Route path='products' element={<ProductsPage />} />
+        </Route>
+
         {/* AUTHENTICATION */}
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<SignUp />} />
@@ -32,7 +36,7 @@ function App() {
         </Route>
 
         {/* GITHUB */}
-        <Route path='github' element={<GithubMenu />} />
+        {/* <Route path='github' element={<GithubMenu />} /> */}
         {/* ERROR PAGES */}
         <Route path="*" element={<NotFound />} />
       </Route>
