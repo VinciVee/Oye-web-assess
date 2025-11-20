@@ -4,8 +4,8 @@ import { vars } from "../../styles/themes.css";
 export const oyezBox = style({
   display: "flex",
   flexDirection: "column",
-  justifyItems: "center",
-  alignItems: "center",
+  justifyItems: "start",
+  alignItems: "start",
 })
 
 export const titleText = style({
