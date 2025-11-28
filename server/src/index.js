@@ -4,6 +4,7 @@ require('dotenv').config()
 const morgan = require('morgan')
 const helmet = require('helmet')
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
 const corsOptions = require('./config/corsOptions')
 
 // Import config / routes
@@ -29,6 +30,7 @@ app.use(cors(corsOptions)) //cors("*") - enable pre-flight across-the-board
 // Default middleware for parsing
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(fileUpload({ createParentPath: true }))
 
 // Dev morgan output
 app.use(morgan('dev'))

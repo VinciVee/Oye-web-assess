@@ -13,13 +13,15 @@ module.exports = () => {
   // AUTH: Register / Sign up (POST): /api/auth/register
   router.post('/register',
     AuthPolicy.validateAuth,
-    AuthController.register)
+    AuthController.register
+  )
 
 
   // AUTH: Login / Sign in (POST) Route: /api/auth/log
   router.post('/login',
     AuthPolicy.validateAuth,
-    AuthController.login)
+    AuthController.login
+  )
 
   return router
 }

@@ -803,6 +803,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"busboy@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "busboy@npm:1.6.0"
+  dependencies:
+    streamsearch: "npm:^1.1.0"
+  checksum: 10c0/fa7e836a2b82699b6e074393428b91ae579d4f9e21f5ac468e1b459a244341d722d2d22d10920cdd849743dbece6dca11d72de939fb75a7448825cf2babfba1f
+  languageName: node
+  linkType: hard
+
 "bytes@npm:3.1.2, bytes@npm:^3.1.2":
   version: 3.1.2
   resolution: "bytes@npm:3.1.2"
@@ -884,6 +893,16 @@ __metadata:
     strip-ansi: "npm:^6.0.1"
     wrap-ansi: "npm:^7.0.0"
   checksum: 10c0/4bda0f09c340cbb6dfdc1ed508b3ca080f12992c18d68c6be4d9cf51756033d5266e61ec57529e610dacbf4da1c634423b0c1b11037709cc6b09045cbd815df5
+  languageName: node
+  linkType: hard
+
+"cloudinary@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "cloudinary@npm:2.8.0"
+  dependencies:
+    lodash: "npm:^4.17.21"
+    q: "npm:^1.5.1"
+  checksum: 10c0/67e1830f5ab5d9378c021a2057d54d09757df3487f43015fa83885240055ad6ba193ef2392fa104ffa498e32b4e1e378da30661364b65dec81b159b58225f790
   languageName: node
   linkType: hard
 
@@ -1191,6 +1210,15 @@ __metadata:
   version: 3.1.3
   resolution: "exponential-backoff@npm:3.1.3"
   checksum: 10c0/77e3ae682b7b1f4972f563c6dbcd2b0d54ac679e62d5d32f3e5085feba20483cf28bd505543f520e287a56d4d55a28d7874299941faf637e779a1aa5994d1267
+  languageName: node
+  linkType: hard
+
+"express-fileupload@npm:^1.5.2":
+  version: 1.5.2
+  resolution: "express-fileupload@npm:1.5.2"
+  dependencies:
+    busboy: "npm:^1.6.0"
+  checksum: 10c0/faafc5e27f3bd3d53abbf41df1bca23be9456cd293f5c343f8f4aa04ace0f866bf104263128ea79cafb9ead8456eb9b1076bfe2f62d489c7e46c1bef64163cbb
   languageName: node
   linkType: hard
 
@@ -2556,6 +2584,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"q@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "q@npm:1.5.1"
+  checksum: 10c0/7855fbdba126cb7e92ef3a16b47ba998c0786ec7fface236e3eb0135b65df36429d91a86b1fff3ab0927b4ac4ee88a2c44527c7c3b8e2a37efbec9fe34803df4
+  languageName: node
+  linkType: hard
+
 "qs@npm:^6.14.0":
   version: 6.14.0
   resolution: "qs@npm:6.14.0"
@@ -2716,11 +2751,13 @@ __metadata:
   dependencies:
     axios: "npm:^1.13.1"
     bcrypt: "npm:^6.0.0"
+    cloudinary: "npm:^2.8.0"
     cors: "npm:^2.8.5"
     cross-env: "npm:^10.1.0"
     debug: "npm:^4.4.3"
     dotenv: "npm:^17.2.3"
     express: "npm:^5.1.0"
+    express-fileupload: "npm:^1.5.2"
     firebase-admin: "npm:^13.6.0"
     helmet: "npm:^8.1.0"
     joi: "npm:^18.0.1"
@@ -2728,6 +2765,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     morgan: "npm:^1.10.1"
     nodemon: "npm:^3.1.10"
+    uuid: "npm:9"
   languageName: unknown
   linkType: soft
 
@@ -2882,6 +2920,13 @@ __metadata:
   version: 1.0.3
   resolution: "stream-shift@npm:1.0.3"
   checksum: 10c0/939cd1051ca750d240a0625b106a2b988c45fb5a3be0cebe9a9858cb01bc1955e8c7b9fac17a9462976bea4a7b704e317c5c2200c70f0ca715a3363b9aa4fd3b
+  languageName: node
+  linkType: hard
+
+"streamsearch@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "streamsearch@npm:1.1.0"
+  checksum: 10c0/fbd9aecc2621364384d157f7e59426f4bfd385e8b424b5aaa79c83a6f5a1c8fd2e4e3289e95de1eb3511cb96bb333d6281a9919fafce760e4edb35b2cd2facab
   languageName: node
   linkType: hard
 
@@ -3096,6 +3141,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:9, uuid@npm:^9.0.0, uuid@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "uuid@npm:9.0.1"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 10c0/1607dd32ac7fc22f2d8f77051e6a64845c9bce5cd3dd8aa0070c074ec73e666a1f63c7b4e0f4bf2bc8b9d59dc85a15e17807446d9d2b17c8485fbc2147b27f9b
+  languageName: node
+  linkType: hard
+
 "uuid@npm:^11.0.2":
   version: 11.1.0
   resolution: "uuid@npm:11.1.0"
@@ -3111,15 +3165,6 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 10c0/bcbb807a917d374a49f475fae2e87fdca7da5e5530820ef53f65ba1d12131bd81a92ecf259cc7ce317cbe0f289e7d79fdfebcef9bfa3087c8c8a2fa304c9be54
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^9.0.0, uuid@npm:^9.0.1":
-  version: 9.0.1
-  resolution: "uuid@npm:9.0.1"
-  bin:
-    uuid: dist/bin/uuid
-  checksum: 10c0/1607dd32ac7fc22f2d8f77051e6a64845c9bce5cd3dd8aa0070c074ec73e666a1f63c7b4e0f4bf2bc8b9d59dc85a15e17807446d9d2b17c8485fbc2147b27f9b
   languageName: node
   linkType: hard
 
