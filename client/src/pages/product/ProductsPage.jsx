@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import ProductsList from "../../components/features/products/ProductsList"
-
+import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import productService from '../../services/productService';
 import Container from "react-bootstrap/Container";
 import OyezLoader from '../../components/common/OyezLoader';
+import { Button } from 'react-bootstrap';
+import * as styles from './ProductsPage.css'
 
 function ProductsPage() {
+  const { user } = useAuth()
   // PRODUCTS STATE
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -56,6 +60,10 @@ function ProductsPage() {
     <Container>
       <h1>Oyez Oyez Store</h1>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates obcaecati dolore deleniti ex ipsa laudantium, mollitia laborum saepe aut autem.</p>
+
+      { user &&
+        <Button as='Link' to='/store/product/add' className={styles.navlink}>Add Product</Button>}
+
       <ProductsList products={products} />
     </Container>
   )
