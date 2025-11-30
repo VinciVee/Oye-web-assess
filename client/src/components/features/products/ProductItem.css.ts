@@ -6,12 +6,13 @@ export const productItem = style({
 })
 
 export const imageCard = style({
-  width: "150px",
+  width: "auto",
   height: "200px",
+  objectFit: "contain",
   marginBottom: vars.space["1x"]
 })
 
 export const productName = style({
-  fontSize: vars.fontSizes["4x"],
+  fontSize: vars.fontSizes.bodyText,
   textTransform: "capitalize"
 })

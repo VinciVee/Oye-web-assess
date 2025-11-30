@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import ProductsList from "../../components/features/products/ProductsList"
 import { Link } from 'react-router-dom';
+import Container from "react-bootstrap/Container";
 import useAuth from '../../hooks/useAuth';
 import productService from '../../services/productService';
-import Container from "react-bootstrap/Container";
+import ProductsList from "../../components/features/products/ProductsList"
 import OyezLoader from '../../components/common/OyezLoader';
-import { Button } from 'react-bootstrap';
+import OyezLink from '../../components/common/OyezLink'
 import * as styles from './ProductsPage.css'
 
 function ProductsPage() {
@@ -40,7 +40,7 @@ function ProductsPage() {
     return (
       <Container className="text-center mt-4">
         <p>Error loading page ...</p>
-        {/* <Link to="/">Return to Home page</Link> */}
+        <Link to="/">Return to Home page</Link>
       </Container>
     )
   }
@@ -62,7 +62,7 @@ function ProductsPage() {
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates obcaecati dolore deleniti ex ipsa laudantium, mollitia laborum saepe aut autem.</p>
 
       { user &&
-        <Button as='Link' to='/store/product/add' className={styles.navlink}>Add Product</Button>}
+        <OyezLink to='/store/product/add'>Add Product</OyezLink>}
 
       <ProductsList products={products} />
     </Container>

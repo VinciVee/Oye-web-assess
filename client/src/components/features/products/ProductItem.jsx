@@ -5,7 +5,7 @@ function ProductItem(product) {
   const { id, name, image, description, category, price, isAvailable, onSale } = product
 
   return (
-    <Link className={styles.productItem} onTimeUpdate={`/store/product/${id}`}>
+    <Link className={styles.productItem} to={`/store/product/${id}`}>
       <div>
         <img
           className={styles.imageCard}

@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuth"
 import { Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { RiShoppingCartFill } from 'react-icons/ri';
-import OyezButton from '../common/OyezButton';
+import OyezLink from '../common/OyezLink';
 
 const Header = () => {
   const { user, logout } = useAuth()
@@ -19,11 +19,10 @@ const Header = () => {
         <Navbar.Brand className={styles.brandLink} as={Link} to='/'>
           <img className={styles.logo} src={logoImg} alt="oyez oyez logo" />
           <div className={styles.logoTextBox}>
-            <span className={styles.brand}>Title</span>
-            {/* <span className={styles.brandSub}>The Official Online Store</span> */}
+            <span className={styles.brandTitle}>All things medieval</span>
           </div>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Toggle autoclose="outside" aria-controls='responsive-navbar-nav'/>
         <Navbar.Collapse id='responsive-navbar-nav'>
           {/* STANDARD NAVLINKS */}
           <Nav className='me-auto'>
@@ -33,12 +32,12 @@ const Header = () => {
           <Nav className={styles.navMenu}>
 
             {/* LOGGED OUT */}
-            {!user && <Nav.Link className={styles.navLink} as={Link} to='/login'>Login</Nav.Link>}
-            {!user && <Nav.Link className={styles.navLink} as={Link} to='/signup'>Sign Up</Nav.Link>}
+            {!user && <OyezLink to='/login'>Login</OyezLink>}
+            {!user && <OyezLink to='/signup'>Sign Up</OyezLink>}
 
             {/* LOGGED IN */}
             {user && <Nav.Link className={styles.navLink} as={Link} to='/dashboard'>Dashboard</Nav.Link>}
-            {user && <OyezButton onClick={logout} outline navbar>Logout</OyezButton>}
+            {user && <Nav.Link  className={styles.navLink} onClick={logout}>Logout</Nav.Link>}
             <button><RiShoppingCartFill /></button>
           </Nav>
         </Navbar.Collapse>

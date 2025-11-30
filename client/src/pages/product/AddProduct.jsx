@@ -21,30 +21,30 @@ function AddProduct() {
   const [loading, setLoading] = useState(false);
 
   // Destructure data state nested object properties & instance of useNavigate class
-  const { name, description, category, price, sizes, texture, onSale, isAvailable } = productData;
+  const { name, description, image, price, category, isAvailable, onSale } = productData;
 
   // FORM FUNCTIONS
-  // [1] handleTextChange will handle change in state value event for TEXT data
-  // NOTE: To update state object, we create shallow copy & mutate properties according to input field changed
+  // Sets form states before onClick event
   const handleTextChange = (e) => {
     const { name, value } = e.target;
     setProductData({ ...productData, [name]: value });
   }
 
-  // [2] handleFileChange will handle change in state for FILE data
+  // Handles change in image field
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    console.log('image file: ', file)
     setProductData({ ...productData, image: file });
   }
 
-  // [3] handleSubmit will control form submission event
+  // Submits form data to server
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      // API Post (refactored)
-      const response = await productService.post(productData);
-      console.log(response);
+      console.log('[AddProduct] sending productData: ', productData)
+      const response = await productService.addProduct(productData);
+      console.log('[AddProduct] addProduct response: ', response);
       navigate('/store/products');
 
     } catch (err) {
@@ -84,6 +84,7 @@ function AddProduct() {
             value={category}
             onChange={ handleTextChange }
           >
+            <option>Select category</option>
             <option value="paintings">Paintings</option>
             <option value="textiles">Textiles</option>
             <option value="sprites">Sprites</option>
@@ -94,7 +95,7 @@ function AddProduct() {
         <Form.Group className="mb-3">
           <Row>
             {/* 4A: PRICE */}
-            <Col lg={4} md={4} sm={12}>
+            <Col lg={6} md={6} sm={12}>
               <Form.Label>Product price</Form.Label>
               <InputGroup>
                 <InputGroup.Text id="price-dollar">$</InputGroup.Text>
@@ -116,6 +117,14 @@ function AddProduct() {
               </Form.Control>
             </Col>
 
+
+          {/* END OF PRODUCT DETAILS ROW */}
+          </Row>
+        </Form.Group>
+
+        {/* GROUP 6: PRODUCT IMAGE */}
+        <Form.Group className="mb-3" controlId="image">
+          <Row>
             {/* 5B: IS AVAILABLE */}
             <Col lg={6} md={6} sm={12}>
               <Form.Label>Product availability</Form.Label>
@@ -130,20 +139,14 @@ function AddProduct() {
               </Form.Control>
             </Col>
 
-          {/* END OF PRODUCT DETAILS ROW */}
-          </Row>
-        </Form.Group>
-
-        {/* GROUP 6: PRODUCT IMAGE */}
-        <Form.Group className="mb-3" controlId="image">
-          <Row>
-
-            <Form.Label>Product image</Form.Label>
-            <Form.Control
-              type="file"
-              className="mb-4"
-              onChange={ handleFileChange }
-            />
+            <Col lg={6} md={6} sm={12}>
+              <Form.Label>Product image</Form.Label>
+              <Form.Control
+                type="file"
+                className="mb-4"
+                onChange={ handleFileChange }
+              />
+            </Col>
           </Row>
         </Form.Group>
 

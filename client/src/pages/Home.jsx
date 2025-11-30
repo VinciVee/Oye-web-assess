@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import OyezBox from '../components/common/OyezBox';
+import OyezButton from '../components/common/OyezButton';
 import * as styles from './Home.css'
 
 const Home = () => {
@@ -12,7 +13,7 @@ const Home = () => {
             <OyezBox
               title="A Gothic Themed Store"
               text="A medieval themed online store"
-              buttonPath="/store/products"
+              buttonPath="/login"
               buttonText="Login"
             />
           </Col>
@@ -36,7 +37,7 @@ const Home = () => {
             <OyezBox
               title="Shop online"
               text="Browse Oyez Oyez&apos;s collection of art, items and icons"
-              buttonPath="/login"
+              buttonPath="/store/products"
               buttonText="Shop Now"
             />
           </Col>

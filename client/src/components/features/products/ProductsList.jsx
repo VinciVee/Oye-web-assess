@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 import ProductItem from "./ProductItem"
 
 import * as styles from './ProductList.css'

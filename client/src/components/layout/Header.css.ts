@@ -14,7 +14,7 @@ export const brandLink = style({
   gap: vars.space['2x'],
   alignItems: "center",
   color: vars.colors.complementary,
-  textTransform: "uppercase",
+  textTransform: "capitalize",
 })
 
 export const logo = style({
@@ -29,7 +29,7 @@ export const logoTextBox = style({
   gap: 0,
 })
 
-export const brand = style({
+export const brandTitle = style({
   fontFamily: vars.fonts.body,
   fontSize: vars.fontSizes.bodyBig,
   lineHeight: "20px"
