@@ -20,7 +20,7 @@ module.exports = () => {
   // PRODUCTS: Get one product (GET): /api/products/:id
   router.get('/:id', ProductController.getProductById)
 
-  // PRODUCTS: Add a product (GET): /api/products/:id
+  // PRODUCTS: Add a product (GET): /api/products/
   router.post('/',
     [ProductPolicy.validateProduct,
     FilePolicy.filesPayloadExists,
