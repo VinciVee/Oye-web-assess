@@ -1,19 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { Button, Container, Spinner } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 
 // Local modules
 import * as styles from "./ProductDetail.css";
 import useAuth from '../../hooks/useAuth';
 import productService from '../../services/productService';
+import OyezCard from '../../components/common/OyezCard';
 import OyezLoader from '../../components/common/OyezLoader';
 import OyezButton from '../../components/common/OyezButton';
+import OyezLink from '../../components/common/OyezLink';
 
 function ProductDetail() {
   // CUSTOM HOOKS
-  const { user } = useAuth();
-  const params = useParams();
-  const navigate = useNavigate();
+  const { user } = useAuth()
+  const params = useParams()
+  const navigate = useNavigate()
 
   // STATE INIT
   const [productData, setProductData] = useState({
@@ -26,41 +28,55 @@ function ProductDetail() {
     isAvailable: true,
     onSale: false,
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
   // Destructure data state nested object properties
-  const { id, name, description, image, price, category, isAvailable, onSale } = productData;
+  const { id, name, description, image, price, category, isAvailable, onSale } = productData
 
   // HOOK: Prevention of useEffect calling TWICE (React v18)
-  const effectRan = useRef(false);
+  const effectRan = useRef(false)
   useEffect(() => {
-    console.log("Effect Ran");
+    console.log("Effect Ran")
     if (effectRan.current === false) {
-      fetchProduct();
-      setLoading(false);
+      fetchProduct()
+      setLoading(false)
 
       // CLEAN UP FUNCTION
       return () => {
-        console.log("Unmounted");
-        effectRan.current = true;
+        console.log("Unmounted")
+        effectRan.current = true
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id])
 
   // FUNCTIONS
   // [1] PAGE POPULATION
   async function fetchProduct() {
     try {
-      const response = await productService.getById(id);
+      const response = await productService.getProductById(id, image);
       const fetchedProduct = await response.data
-      console.log(fetchedProduct);
+      console.log(fetchedProduct)
 
-      setProductData(productOnMount => ({...productOnMount,...fetchedProduct}));
+      setProductData(productOnMount => ({...productOnMount, ...fetchedProduct}))
 
     } catch (err) {
-      console.log(err?.response);
-      setError(true);
+      console.log(err?.response)
+      setError(true)
+    }
+  }
+
+  const handleDelete = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      const response = await productService.deleteProduct(id)
+      navigate('/store/products')
+      // TO DO: Add confirmation / warning pop-up
+    } catch (error) {
+      // scrolls to top of page
+      window.scroll({top: 0, left: 0, behavior: 'smooth' })
+      setTimeout(() => {setLoading(false)}, 1000)
     }
   }
 
@@ -83,7 +99,7 @@ function ProductDetail() {
   }
 
   return (
-    <Container>
+    <OyezCard title="Product Details">
       {/* MAIN PRODUCT SECTION */}
       <div className={styles.productBox}>
         {/* IMAGE BOX: LEFT */}
@@ -101,9 +117,12 @@ function ProductDetail() {
 
           {/* AUTH LINKS: EDIT & DELETE */}
           {user && <div>
-            <Button as={Link} to={`/store/product/edit/${id}`}>Edit</Button>
+            <OyezLink
+              to={`/store/product/edit/${id}`}
+            >Edit
+            </OyezLink>
             <OyezButton
-              onClick
+              onClick={handleDelete}
               loadingState={loading}
             >
               {loading ? <Spinner
@@ -117,7 +136,7 @@ function ProductDetail() {
           </div>}
         </div>
       </div>
-    </Container>
+    </OyezCard>
   )
 }
 

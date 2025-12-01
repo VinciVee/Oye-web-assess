@@ -2,11 +2,12 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '../../styles/themes.css';
 
 export const generalForm = style({
-  minWidth: "60vw"
+  maxWidth: "70vw",
+  width: "100%"
 })
 
 export const authForm = style({
-  minWidth: "25vw"
+  maxWidth: "50vw",
 })
 
 export const container = style({

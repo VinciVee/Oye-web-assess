@@ -7,24 +7,38 @@ async function getAll() {
   return response
 }
 
-// GET PRODUCT BY ID
-// GET /api/products/:id
-
-
-// ADD PRODUCT
-async function addProduct(data) {
-  const formData = prepareFormData(data)
-  const response = await api.post('/api/products', formData, formConfig)
+// GET ON SALE PRODUCTS
+async function getOnSale() {
+  const response = await api.get('/api/products/sales')
   return response
 }
 
-// UPDATE PRODUCT
-// PUT /api/products/:id
+// GET PRODUCT BY ID
+async function getProductById(id) {
+  const response = await api.get(`/api/products/${id}`)
+  return response
+}
 
+// ADD PRODUCT
+function addProduct(data) {
+  const formData = prepareFormData(data)
+  return api.post(
+    '/api/products', formData, formConfig
+  )
+}
+
+// UPDATE PRODUCT
+function updateProduct(id, data) {
+  const formData = prepareFormData(data)
+  return api.put(
+    `/api/products/${id}`, formData, formConfig
+  )
+}
 
 // DELETE PRODUCT
-// DELETE /api/products/:id
-
+function deleteProduct(id, oldImageId) {
+  return api.delete(`/api/products/${id}`, oldImageId)
+}
 
 // HELPER TOOLS / FUNCTIONS
 const formConfig = {
@@ -58,7 +72,11 @@ function prepareFormData(data, oldImageId){
 
 const productService = {
   getAll,
-  addProduct
+  getOnSale,
+  getProductById,
+  addProduct,
+  updateProduct,
+  deleteProduct,
 }
 
 export default productService

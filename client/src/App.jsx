@@ -13,6 +13,7 @@ import PrivateRoutes from './components/layout/PrivateRoutes';
 import AddProduct from './pages/product/AddProduct';
 import EditProduct from './pages/product/EditProduct';
 import ProductDetail from './pages/product/ProductDetail';
+import OnSalePage from './pages/product/OnSalePage';
 
 // Import components
 import Layout from './components/layout/Layout';
@@ -27,8 +28,9 @@ function App() {
         {/* PRODUCTS: /store/... */}
         <Route path="store">
           <Route path='products' element={<ProductsPage />} />
+          <Route path='sales' element={<OnSalePage />} />
           <Route path='product'>
-              <Route path=':id' element={<ProductDetail />} />
+            <Route path=':id' element={<ProductDetail />} />
             <Route element={<PrivateRoutes />} >
               <Route path='add' element={<AddProduct />} />
               <Route path='edit/:id' element={<EditProduct />} />

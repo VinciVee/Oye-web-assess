@@ -9,7 +9,7 @@ export const oyezLink = style({
   backgroundColor: vars.colors.grey300,
   padding: `${vars.space['1x']} ${vars.space['4x']}` ,
   border: `3px ${vars.colors.primary} solid`,
-  borderStyle: "inset",
+  borderStyle: "outset",
 
   ":hover": {
     color: vars.colors.brandDark,

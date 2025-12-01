@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, ButtonToolbar, } from "react-bootstrap";
+import { Container } from 'react-bootstrap';
 
 // Local modules
 import useAuth from '../../hooks/useAuth';
@@ -8,9 +8,9 @@ import productService from '../../services/productService';
 import ProductsList from "../../components/features/products/ProductsList"
 import OyezLoader from '../../components/common/OyezLoader';
 import OyezLink from '../../components/common/OyezLink'
-import * as styles from './ProductsPage.css'
+import * as styles from './OnSalePage.css'
 
-function ProductsPage() {
+function OnSalePage() {
   const { user } = useAuth()
   // PRODUCTS STATE
   const [products, setProducts] = useState([])
@@ -18,13 +18,13 @@ function ProductsPage() {
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    fetchProducts()
+    fetchSaleProducts()
   }, [])
 
   // Fetch products function
-  async function fetchProducts(){
+  async function fetchSaleProducts(){
     try {
-      const response = await productService.getAll()
+      const response = await productService.getOnSale()
       const data = await response.data
       // console.log(data)
       setProducts(data)
@@ -61,18 +61,12 @@ function ProductsPage() {
   return (
     <Container>
       <h1>Oyez Oyez Store</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates obcaecati dolore deleniti ex ipsa laudantium, mollitia laborum saepe aut autem.</p>
-
-      <ButtonToolbar className='mb-3' aria-label='product list filter options' >
-        <OyezLink to='/store/sales'>On Sale</OyezLink>
-        { user &&
-          <OyezLink to='/store/product/add'>Add Product</OyezLink>
-        }
-      </ButtonToolbar>
+      <p>On sale products</p>
+      <OyezLink to='/store/products'>All Products</OyezLink>
 
       <ProductsList products={products} />
     </Container>
   )
 }
 
-export default ProductsPage
+export default OnSalePage
