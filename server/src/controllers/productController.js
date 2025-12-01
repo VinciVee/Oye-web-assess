@@ -1,6 +1,6 @@
 const { db } = require('../config/db')
 const ApiError = require('../utilities/ApiError')
-const { cloudinaryImageUpload } = require('../lib/cloudinaryImageUploadService')
+const { cloudinaryImageUpload, cloudinaryDeleteImage, getFileIdFromUrl } = require('../lib/cloudinaryImageUploadService')
 
 const debugREAD = require('debug')('app:read');
 const debugWRITE = require('debug')('app:write');
@@ -12,8 +12,11 @@ module.exports = {
       // Store doc query
       const productsRef = db.collection('products')
 
+      // LIMIT QUERY
+      const snapshot = await productsRef.limit(20).get()
+
       // SORT KEY QUERY #3 (compound)
-      // const snapshot = await productsRef.where("onSale","==",true).orderBy("name","desc").get()
+      // const snapshot = await productsRef.where("category","==","painting").orderBy("name","desc").get()
 
       // SORT KEY QUERY #2 (where)
       // const snapshot = await productsRef.where("onSale","==",true).get()
@@ -21,8 +24,6 @@ module.exports = {
       // SORT KEY QUERY #1 (order)
       // const snapshot = await productsRef.orderBy("name","asc").get()
 
-      // LIMIT QUERY
-      const snapshot = await productsRef.limit(10).get()
 
       // [400 ERROR] Check for no documents
       if(snapshot.empty){
@@ -53,9 +54,9 @@ module.exports = {
   // GET ONSALE PRODUCTS
   async getOnSaleProducts(req, res, next){
     try {
-      // Store the collection reference in variable & call GET method (with comp index)
       const productRef = db.collection('products');
-      const snapshot = await productRef.where("onSale", "==", "true").orderBy("name", "asc").limit(10).get();
+      // Added search query
+      const snapshot = await productRef.where("onSale", "==", true).orderBy("name", "asc").limit(20).get()
 
       // [400 ERROR] Check for User Asking for Non-Existent Documents
       if (snapshot.empty) {
@@ -74,12 +75,12 @@ module.exports = {
             category: doc.data().category,
             isAvailable: doc.data().isAvailable,
             onSale: doc.data().onSale,
-          });
-        });
-        res.send(docs);
+          })
+        })
+        res.send(docs)
       }
     } catch(error) {
-      return next(ApiError.internal('The items selected could not be found', error));
+      return next(ApiError.internal('The item(s) selected could not be found', error));
     }
   },
 
@@ -108,14 +109,14 @@ module.exports = {
     debugWRITE(req.files);
     debugWRITE(res.locals);
 
-    let downloadURL;
+    let downloadUrl;
     try {
       if(req.files){
         const filename = res.locals.filename;
 
         // CLOUDINARY IMAGE UPLOAD SERVICE
         const uploadResult = await cloudinaryImageUpload(filename);
-        downloadURL = uploadResult.data.secure_url;
+        downloadUrl = uploadResult.data.secure_url;
 
         if (req.body.oldImageId) {
           debugWRITE(`Deleting old image in storage: ${req.body.oldImageId}`);
@@ -124,7 +125,7 @@ module.exports = {
         }
       } else {
         debugWRITE(`No change to image in DB`);
-        downloadURL = req.body.image;
+        downloadUrl = req.body.image;
       }
     } catch(error) {
       return next(ApiError.internal('An error occurred uploading the image to storage', error));
@@ -135,7 +136,7 @@ module.exports = {
       const response = await productsRef.add({
         name: req.body.name,
         description: req.body.description,
-        image: downloadURL,
+        image: downloadUrl,
         price: Number(req.body.price),
         category: req.body.category,
         isAvailable: req.body.isAvailable,
@@ -159,24 +160,26 @@ module.exports = {
     debugWRITE(req.files);
     debugWRITE(res.locals);
 
-    let downloadURL;
+    let downloadUrl;
+
     try {
       if (req.files){
         const filename = res.locals.filename;
 
         // CLOUDINARY IMAGE UPLOAD SERVICE
-        const uploadResult = await cloudinaryImageUpload(filename);
-        downloadURL = uploadResult.data.secure_url;
+        const uploadResult = await cloudinaryImageUpload(filename)
+        downloadUrl = uploadResult.data.secure_url
 
         // Delete old image
         if (req.body.oldImageId) {
-          debugWRITE(`Deleting old image in storage: ${req.body.oldImageId}`);
-          const deleteResult = await cloudinaryDeleteImage(req.body.oldImageId);
+          debugWRITE(`Deleting old image in storage: ${req.body.oldImageId}`)
+          const oldImagePublicId = getFileIdFromUrl(req.body.oldImageId)
+          const deleteResult = await cloudinaryDeleteImage(oldImagePublicId)
           debugWRITE(deleteResult)
         }
       } else {
-        console.log(`DB image unchanged`);
-        downloadURL = req.body.image;
+        console.log(`DB image unchanged`)
+        downloadUrl = req.body.image;
       }
     } catch(error) {
       return next(ApiError.internal('An error occurred in saving the image to storage', error));
@@ -186,7 +189,7 @@ module.exports = {
       const response = await productRef.update({
         name: req.body.name,
         description: req.body.description,
-        image: downloadURL,
+        image: downloadUrl,
         price: Number(req.body.price),
         category: req.body.category,
         isAvailable: req.body.isAvailable,
@@ -202,23 +205,34 @@ module.exports = {
 
   // DELETE PRODUCT
   async deleteProduct(req, res, next) {
+    debugREAD(req.params);
+
     try {
-      // Getting image from Cloudinary by id
-      const productRef = db.collection('products').doc(req.params.id);
-      const doc = await productRef.get();
-
+      // Getting Cloudinary image url
+      const productRef = db.collection('products').doc(req.params.id)
+      const doc = await productRef.get()
       if (!doc.exists) {
-        return next(ApiError.notFound("Item(s) not found"));
+        return next(ApiError.notFound("Item not found"))
       }
+
+      const imageUrl = doc.data().image
+
       // Delete product from Firestore
-      await productRef.delete();
+      await productRef.delete()
 
-      // Delete linked images in storage and cloudinary
-      debugWRITE(`Deleting image in storage: ${req.body.oldImageId}`);
-      const deleteResult = await cloudinaryDeleteImage(req.body.oldImageId);
-      debugWRITE(deleteResult)
+      // Delete image in cloudinary
+      if(imageUrl) {
+        // Get image's public id
+        imagePublicId = getFileIdFromUrl(imageUrl)
 
-      res.send({ message: "Product deleted successfully" });
+        debugWRITE(`Deleting image in storage: ${imagePublicId}`)
+        const deleteResult = await cloudinaryDeleteImage(imagePublicId)
+        debugWRITE(deleteResult)
+      } else {
+        debugWRITE('No old image deleted')
+      }
+
+      res.send({ message: "Product deleted successfully" })
 
     } catch (error) {
       return next(

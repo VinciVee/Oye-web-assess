@@ -7,7 +7,9 @@ const AuthPolicy = require('../policies/authPolicy')
 
 module.exports = () => {
   // AUTH TEST ROUTE: Lists all users (GET): /api/auth/users
-  router.get('/users', AuthController.listUsers)
+  router.get('/users',
+    AuthController.listUsers
+  )
   // Only referencing listUsers - insteading of using listUsers()
 
   // AUTH: Register / Sign up (POST): /api/auth/register

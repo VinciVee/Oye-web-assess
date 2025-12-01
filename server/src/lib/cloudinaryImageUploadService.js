@@ -1,7 +1,7 @@
 const { cloudUploader } = require('../config/db');
 const config = require('../config/config');
 
-const fs = require('fs');
+const fs = require('fs'); // file system
 const uuid = require('uuid')
 
 module.exports = {

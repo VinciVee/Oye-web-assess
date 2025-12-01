@@ -3,15 +3,13 @@ const path = require('path');
 
 // [1] VALIDATION: Check for file passed from client
 const filesPayloadExists = (req, res, next) => {
-  // if(!req.files && !req.body.oldImageId) {
-  //   return next(ApiError.badRequest('No file uploaded'));
-
-  // }
-  console.log('[filesPayloadExists] req.body: ', req.body)
-  if(!req.files) {
+  if(!req.files && !req.body.oldImageId) {
     return next(ApiError.badRequest('No file uploaded'));
-
   }
+  // console.log('[filesPayloadExists] req.body: ', req.body)
+  // if(!req.files) {
+  //   return next(ApiError.badRequest('No file uploaded'));
+  // }
   next();
 }
 
@@ -46,7 +44,6 @@ const fileExtLimiter = (allowedExtArray) => {
         return next(ApiError.cannotProcess(message));
       }
     }
-
     next();
   }
 }

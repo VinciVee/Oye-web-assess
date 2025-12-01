@@ -13,9 +13,7 @@ module.exports = () => {
   router.get('/', ProductController.getAllProducts)
 
   // GET: onSale Products
-  router.get('/onsale',
-    ProductController.getOnSaleProducts
-  );
+  router.get('/sales', ProductController.getOnSaleProducts)
 
   // PRODUCTS: Get one product (GET): /api/products/:id
   router.get('/:id', ProductController.getProductById)
@@ -33,14 +31,15 @@ module.exports = () => {
   // PRODUCTS: Delete a product (DELETE): /api/products/:id
   router.delete('/:id',
     [],
-    ProductController.deleteProduct)
+    ProductController.deleteProduct
+  )
 
   // PRODUCTS: Update a product (UPDATE): /api/products/:id
   router.put('/:id',
     [ProductPolicy.validateProduct,
     FilePolicy.filesPayloadExists,
     FilePolicy.fileSizeLimiter,
-    FilePolicy.fileExtLimiter(['.png', '.jpg', '.jpeg', '.gif']),
+    FilePolicy.fileExtLimiter(['.png','.jpg','.gif','.webp','.jpeg']),
     fileServerUpload],
     ProductController.updateProduct,
   )
