@@ -24,39 +24,6 @@ function ProductDetail() {
     queryFn: () => fetchProduct(id)
   })
 
-  // STATE INIT
-  // const [productData, setProductData] = useState({
-  //   id: params.id,
-  //   name: "",
-  //   description: "",
-  //   image: "",
-  //   price: 0,
-  //   category: "",
-  //   isAvailable: true,
-  //   onSale: false,
-  // });
-  // const [loading, setLoading] = useState(true)
-  // const [error, setError] = useState(false)
-  // Destructure data state nested object properties
-  // const { name, description, image, price, category, isAvailable, onSale } = productData
-
-  // HOOK: Prevention of useEffect calling TWICE (React v18)
-  // const effectRan = useRef(false)
-  // useEffect(() => {
-  //   console.log("Effect Ran")
-  //   if (effectRan.current === false) {
-  //     fetchProduct()
-  //     setLoading(false)
-
-  //     // CLEAN UP FUNCTION
-  //     return () => {
-  //       console.log("Unmounted")
-  //       effectRan.current = true
-  //     }
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [id])
-
   // FUNCTIONS
   // [1] PAGE POPULATION
   async function fetchProduct(productId) {
@@ -65,12 +32,9 @@ function ProductDetail() {
       console.log(response.data)
       return response.data
 
-      // setProductData(productOnMount => ({...productOnMount, ...fetchedProduct}))
 
     } catch (err) {
       throw err
-      // console.log(err?.response)
-      // setError(true)
     }
   }
 
@@ -86,22 +50,6 @@ function ProductDetail() {
       throw err
     }
   }
-  // const deleteProduct = async (e) => {
-  //   e.preventDefault()
-  //   setLoading(true)
-  //   try {
-  //     const response = await productService.deleteProduct(id)
-
-  //     setLoading(false)
-  //     navigate('/store/products')
-  //     // TO DO: Add confirmation / warning pop-up
-  //   } catch (error) {
-  //     setError(true)
-  //     // scrolls to top of page
-  //     window.scroll({top: 0, left: 0, behavior: 'smooth' })
-  //     setTimeout(() => {setLoading(false)}, 1000)
-  //   }
-  // }
 
   // Mutation query
   const mutation = useMutation({

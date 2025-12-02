@@ -64,7 +64,6 @@ function EditProduct() {
       if (!response.data.image) {
         console.log('No downloadUrl provided from database')
       } else {
-        // const fileGlob = getFileIdFromUrl(dbProduct.image);
         setOldImageId(dbProduct.image)
       }
 
@@ -97,7 +96,7 @@ function EditProduct() {
     e.preventDefault()
     setLoading(true)
     try {
-      const response = await productService.updateProduct(productData)
+      const response = await productService.updateProduct(id, productData, oldImageId)
       navigate('/store/products')
 
     } catch (err) {

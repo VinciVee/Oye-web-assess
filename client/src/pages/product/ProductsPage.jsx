@@ -13,10 +13,6 @@ import * as styles from './ProductsPage.css'
 
 function ProductsPage() {
   const { user } = useAuth()
-  // PRODUCTS STATE
-  // const [products, setProducts] = useState([])
-  // const [loading, setLoading] = useState(true)
-  // const [error, setError] = useState(false)
 
   // TanStack: Data Fetch onMount
   const { isPending, isError, data, error } = useQuery({
@@ -24,23 +20,6 @@ function ProductsPage() {
     queryFn: fetchProducts,
     retry: 0 // try once only, then give error message
   })
-
-  // ON-LOAD SIDE EFFECTS
-  // const effectRan = useRef(false)
-
-  // useEffect(() => {
-  //   console.log("Effect Ran")
-  //   if (effectRan.current === false) {
-  //     fetchProducts()
-  //     setLoading(false)
-
-  //     return () => {
-  //       console.log("Unmounted")
-  //       effectRan.current = true
-  //     }
-
-  //   }
-  // }, [])
 
   // Fetch products function
   async function fetchProducts(){
