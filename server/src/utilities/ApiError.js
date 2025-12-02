@@ -10,9 +10,19 @@ class ApiError {
   }
 
   // [400] Bad Request
-  // PARAMETERS: We just pass in our custom message & status code is set as part of the function
+  // PARAMETERS: custom message & status code is set as part of the function
   static badRequest(msg) {
     return new ApiError(400, `Bad Request: ${msg}`)
+  }
+
+  // [401] Unauthorised (no or invalid credentials)
+  static denyAccess(msg) {
+    return new ApiError(401, `Access Denied: ${msg}`)
+  }
+
+  // [403] Forbidden (logged-in but does not have require priviledges)
+  static forbidden(msg) {
+    return new ApiError(403, `Access Denied: ${msg}`)
   }
 
   // [404] Not Found

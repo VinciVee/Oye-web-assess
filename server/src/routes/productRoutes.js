@@ -2,44 +2,48 @@ const express = require('express')
 // Router instance of app (express) - hook into app instance - add-on
 const router = express.Router()
 
-const ProductController = require('../controllers/productController')
+const FilePolicy = require("../policies/filePolicy")
+const VerifyAuth = require('../middleware/verifyAuth')
 const fileServerUpload = require('../middleware/fileServerUpload')
 const ProductPolicy = require('../policies/productPolicy')
-const FilePolicy = require("../policies/filePolicy")
+const ProductController = require('../controllers/productController')
 
 
 module.exports = () => {
-  // PRODUCTS: Get all products (GET): /api/products
+  // [GET] ALL PRODUCTS: /api/products
   router.get('/', ProductController.getAllProducts)
 
-  // GET: onSale Products
+  // [GET] ON SALE PRODUCTS: /api/products/sales
   router.get('/sales', ProductController.getOnSaleProducts)
 
-  // PRODUCTS: Get one product (GET): /api/products/:id
+  // [GET] PRODUCT BY ID: /api/products/:id
   router.get('/:id', ProductController.getProductById)
 
-  // PRODUCTS: Add a product (GET): /api/products/
+  // [POST] add A PRODUCT: /api/products/
   router.post('/',
     [ProductPolicy.validateProduct,
     FilePolicy.filesPayloadExists,
     FilePolicy.fileSizeLimiter,
     FilePolicy.fileExtLimiter(['.png','.jpg','.gif','.webp','.jpeg']),
+    VerifyAuth.auth,
     fileServerUpload],
     ProductController.addProduct
   )
 
-  // PRODUCTS: Delete a product (DELETE): /api/products/:id
+  // [DELETE] A PRODUCT: /api/products/:id
   router.delete('/:id',
-    [],
+    [VerifyAuth.auth,
+      VerifyAuth.admin],
     ProductController.deleteProduct
   )
 
-  // PRODUCTS: Update a product (UPDATE): /api/products/:id
+  // [PUT] update A PRODUCT: /api/products/:id
   router.put('/:id',
     [ProductPolicy.validateProduct,
     FilePolicy.filesPayloadExists,
     FilePolicy.fileSizeLimiter,
     FilePolicy.fileExtLimiter(['.png','.jpg','.gif','.webp','.jpeg']),
+    VerifyAuth.auth,
     fileServerUpload],
     ProductController.updateProduct,
   )

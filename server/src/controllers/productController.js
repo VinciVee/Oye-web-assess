@@ -217,22 +217,17 @@ module.exports = {
 
       const imageUrl = doc.data().image
 
-      // Delete product from Firestore
-      await productRef.delete()
-
       // Delete image in cloudinary
-      if(imageUrl) {
-        // Get image's public id
-        imagePublicId = getFileIdFromUrl(imageUrl)
+      // Get image's public id
+      imagePublicId = getFileIdFromUrl(imageUrl)
+      debugWRITE(`Deleting image in storage: ${imagePublicId}`)
+      const deleteResult = await cloudinaryDeleteImage(imagePublicId)
 
-        debugWRITE(`Deleting image in storage: ${imagePublicId}`)
-        const deleteResult = await cloudinaryDeleteImage(imagePublicId)
-        debugWRITE(deleteResult)
-      } else {
-        debugWRITE('No old image deleted')
+      // Delete product from Firestore
+      if(deleteResult.success) {
+        const response = await productRef.delete({ exists: true }) // precondition: double-check to prevent a hard error
+        res.send({ message: "Product deleted successfully" })
       }
-
-      res.send({ message: "Product deleted successfully" })
 
     } catch (error) {
       return next(
