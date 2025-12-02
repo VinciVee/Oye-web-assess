@@ -1,6 +1,7 @@
 import useAuth from "../../hooks/useAuth"
 import OyezForm from "../../components/common/OyezForm"
 import OyezLoader from "../../components/common/OyezLoader"
+import { Card } from "react-bootstrap"
 
 function Dashboard() {
   const { user, userLoading } = useAuth()
@@ -18,9 +19,17 @@ function Dashboard() {
   }
 
   return (
-    <OyezForm title="Profile" authform>
-      <p>{user.username}</p>
-      {user.isAdmin && <p style={{ color: "darkblue "}}>You are admin!</p>}
+    <OyezForm title={`Welcome ${user.username}`} authform>
+      <Card style={{ width: '18rem' }}>
+        <Card.Header>Profile</Card.Header>
+        <Card.Img variant="top" src={user.image} />
+        <Card.Body>
+          <Card.Title>{user.username}</Card.Title>
+          <Card.Text>
+            {user.isAdmin ? "Admin" : "User" }
+          </Card.Text>
+        </Card.Body>
+      </Card>
     </OyezForm>
   )
 }

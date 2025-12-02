@@ -45,6 +45,7 @@ function AddProduct() {
     setLoading(true);
     try {
       console.log('[AddProduct] sending productData: ', productData)
+
       const response = await productService.addProduct(productData);
       console.log('[AddProduct] addProduct response: ', response);
       navigate('/store/products');

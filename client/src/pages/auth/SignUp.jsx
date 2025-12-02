@@ -17,9 +17,10 @@ function SignUp() {
   const [user, setUser] = useState({
     username: "",
     email: "",
-    password: ""
+    password: "",
+    image: ""
   })
-  const { username, email, password } = user
+  const { username, email, password, image } = user
   const [loading, setLoading ] = useState(false)
   // useRef maintains the value (of passwordConfirmRef in that case)
   // useRef does not rerender the page, as useState would
@@ -29,9 +30,16 @@ function SignUp() {
   const handleTextChange = (e) => {
     setUser({
       ...user,
-      // for this to work, name of attribute (in Form) needs to be the same as name of variable in user.
       [e.target.name]: e.target.value
     })
+  }
+
+  // Handles change in image field
+  // event: user uploads an image
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    console.log('image file: ', file)
+    setUser({ ...user, image: file });
   }
 
   // Function: handleSubmit
@@ -45,17 +53,17 @@ function SignUp() {
       // If password DOES NOT match passwordConf., trigger this
       toast.warn("Passwords do not match")
       setLoading(false)
-
       return
     }
-
     // API call
     try {
       const response = await authService.register(user)
       loginSaveUser(response.data)
       navigate('/dashboard')
 
-    } catch(err){
+    } catch(err) {
+      // scrolls to top of page
+      window.scroll({top: 0, left: 0, behavior: 'smooth' });
       setTimeout(() => {setLoading(false), 1000})
     }
   }
@@ -67,50 +75,69 @@ function SignUp() {
         <FloatingLabel
           controlId="username"
           label="Username*"
-          className="mb-3" >
-            <Form.Control
-              type="text"
-              placeholder="Username"
-              name="username"
-              onChange={handleTextChange}
-              value={username} />
+          className="mb-3"
+        >
+          <Form.Control
+            type="text"
+            placeholder="Username"
+            name="username"
+            onChange={handleTextChange}
+            value={username}
+          />
         </FloatingLabel>
 
         {/* EMAIL */}
         <FloatingLabel
           controlId="email"
           label="Email address*"
-          className="mb-3" >
-            <Form.Control
-              type="email"
-              placeholder="name@example.com"
-              name="email"
-              onChange={handleTextChange}
-              value={email} />
+          className="mb-3"
+        >
+          <Form.Control
+            type="email"
+            placeholder="name@example.com"
+            name="email"
+            onChange={handleTextChange}
+            value={email}
+          />
         </FloatingLabel>
+
+        {/* IMAGE */}
+        <Form.Group
+          controlId="image"
+          className="mb-3"
+        >
+          <Form.Label>Profile image</Form.Label>
+          <Form.Control
+            type="file"
+            onChange={handleFileChange}
+          />
+        </Form.Group>
 
         {/* PASSWORD */}
         <FloatingLabel
           controlId="password"
           label="Password*"
-          className="mb-3" >
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleTextChange}
-              value={password} />
+          className="mb-3"
+        >
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={handleTextChange}
+            value={password}
+          />
         </FloatingLabel>
 
         {/* PASSWORD CONFIRMATION */}
         <FloatingLabel
           controlId="password-confirm"
           label="Password Confirmation*"
-          className="mb-3">
-            <Form.Control
-              type="password"
-              placeholder="Password Confirmation"
-              ref={passwordConfirmRef} />
+          className="mb-3"
+        >
+          <Form.Control
+            type="password"
+            placeholder="Password Confirmation"
+            ref={passwordConfirmRef} />
         </FloatingLabel>
 
         {/* SUBMIT BUTTON */}
