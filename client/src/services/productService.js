@@ -28,8 +28,8 @@ function addProduct(data) {
 }
 
 // UPDATE PRODUCT
-function updateProduct(id, data) {
-  const formData = prepareFormData(data)
+function updateProduct(id, data, oldImageId) {
+  const formData = prepareFormData(data, oldImageId)
   return api.put(
     `/api/products/${id}`, formData, formConfig
   )

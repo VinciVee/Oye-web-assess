@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
+import { useQuery } from "@tanstack/react-query"
 import { Link } from 'react-router-dom';
 import { Container, ButtonToolbar, } from "react-bootstrap";
 
@@ -13,42 +14,51 @@ import * as styles from './ProductsPage.css'
 function ProductsPage() {
   const { user } = useAuth()
   // PRODUCTS STATE
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  // const [products, setProducts] = useState([])
+  // const [loading, setLoading] = useState(true)
+  // const [error, setError] = useState(false)
 
-  useEffect(() => {
-    fetchProducts()
-  }, [])
+  // TanStack: Data Fetch onMount
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ['products'], // note: be consistent with keys across you app
+    queryFn: fetchProducts,
+    retry: 0 // try once only, then give error message
+  })
+
+  // ON-LOAD SIDE EFFECTS
+  // const effectRan = useRef(false)
+
+  // useEffect(() => {
+  //   console.log("Effect Ran")
+  //   if (effectRan.current === false) {
+  //     fetchProducts()
+  //     setLoading(false)
+
+  //     return () => {
+  //       console.log("Unmounted")
+  //       effectRan.current = true
+  //     }
+
+  //   }
+  // }, [])
 
   // Fetch products function
   async function fetchProducts(){
     try {
       const response = await productService.getAll()
-      const data = await response.data
-      // console.log(data)
-      setProducts(data)
-
+      console.log(response.data)
+      return response.data  // until returned, isPending is true
+      // setProducts(data)
     } catch(err) {
-      setError(true)
-
+      throw err; // will be handled by useQuery
+      // setError(true)
     } finally {
-      setLoading(false)
+      // setLoading(false)
     }
   }
 
-  // CONDITIONAL LOAD: ERROR
-  if (error) {
-    return (
-      <Container className="text-center mt-4">
-        <p>Error loading page ...</p>
-        <Link to="/">Return to Home page</Link>
-      </Container>
-    )
-  }
-
   // CONDITIONAL LOAD: LOADING
-  if (loading) {
+  if (isPending) {
     return (
       <Container className="text-center">
         <OyezLoader />
@@ -56,12 +66,20 @@ function ProductsPage() {
     )
   }
 
-  // PRODUCTS FUNCTIONS
+  // CONDITIONAL LOAD: ERROR
+  if (isError) {
+    return (
+      <Container className="text-center mt-4">
+        <p>Error: {error.message}</p>
+        <Link to="/">Return to Home page</Link>
+      </Container>
+    )
+  }
 
   return (
     <Container>
       <h1>Oyez Oyez Store</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates obcaecati dolore deleniti ex ipsa laudantium, mollitia laborum saepe aut autem.</p>
+      <p>Products</p>
 
       <ButtonToolbar className='mb-3' aria-label='product list filter options' >
         <OyezLink to='/store/sales'>On Sale</OyezLink>

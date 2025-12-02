@@ -55,18 +55,17 @@ function EditProduct() {
     try {
       // (i) API FETCH CALL
       const response = await productService.getProductById(id)
-      const dbProduct = await response.data
-      console.log(dbProduct)
+      console.log(response.data)
 
       // (ii) UPDATING STATE DATA OBJECT
-      setProductData(productData => ({ ...productData, ...dbProduct }))
+      setProductData(productData => ({ ...productData, ...response.data }))
 
       // Save oldImageId string to state
-      if (!dbProduct.image) {
-        console.log('No downloadURL provided by DB')
+      if (!response.data.image) {
+        console.log('No downloadUrl provided from database')
       } else {
-        const fileGlob = getFileIdFromUrl(dbProduct.image);
-        setOldImageId(fileGlob)
+        // const fileGlob = getFileIdFromUrl(dbProduct.image);
+        setOldImageId(dbProduct.image)
       }
 
     // (iii) CLEANUP FUNCTIONS
