@@ -2,6 +2,7 @@ const ApiError = require('../utilities/ApiError');
 const path = require('path');
 const debugWRITE = require('debug')('app:post');
 
+// STORES THE IMAGE FILE ON THE SERVER
 const fileServerUpload = (req, res, next) => {
   if(req.files) {
     // [1] STORE FILE (SINGLE)

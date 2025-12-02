@@ -7,21 +7,21 @@ module.exports = {
   validateAuth(req ,res, next){
     debugJoi(req.body)
     const schema = Joi.object({
-      username: Joi.string().min(3).max(50).alphanum(),
+      username: Joi.string().min(3).max(50).alphanum().required(),
       email: Joi.string().email({
         minDomainSegments: 2,
-        tlds: {
-          allow: ['com', 'net']
-        }}).required(),
-      password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required()
-    })
+        tlds: {allow: ['com', 'net', 'au']}}).required(),
+      password: Joi.string()
+        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+      image: Joi.any().required()
+    });
 
     // Call the validate function to potentially return erros for bad data
     const { error, value } = schema.validate(req.body)
 
     // Check for error & what it is
     if(error){
-      debugJoi(error.details[0].context)
+      debugJoi(error)
       switch(error.details[0].context.key){
         case 'username':
           next(ApiError.badRequest(error.details[0].message))
@@ -35,11 +35,15 @@ module.exports = {
           next(ApiError.badRequest('You must provide a valid password '))
           break
 
+        case 'image':
+          next(ApiError.badRequest('Invalid image URL. Please re-upload the image'))
+          break
+
         default:
           next(ApiError.badRequest('Invalid form information - please check and submit again later ...'))
       }
     } else {
-      // No error = pass to the next middleware
+      // On success, pass to the next middleware
       next()
     }
   }

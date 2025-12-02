@@ -2,6 +2,8 @@ const { db } = require('../config/db')
 const ApiError = require('../utilities/ApiError')
 const { findUser, hashPassword, userDetailsToJSON, jwtSignUser, comparePassword } = require('../utilities/authServices')
 
+const debugAuth = require('debug')('app:auth')
+
 module.exports = {
   // LIST ALL USERS
   async listUsers(req, res, next){
@@ -22,7 +24,8 @@ module.exports = {
           id: doc.id,
           username: doc.data().username,
           email: doc.data().email,
-          isAdmin: doc.data().isAdmin
+          isAdmin: doc.data().isAdmin,
+          image: doc.data().image
         })
       })
       res.send(users)
@@ -34,10 +37,15 @@ module.exports = {
 
   // REGISTER USERS
   async register(req, res, next){
+    debugAuth(req.body)
+    debugAuth(req.files)
+    debugAuth(res.locals)
+
+    let downloadUrl;
+    // CHECK IF USER EXISTS AND UPLOAD IMAGE TO CLOUDINARY
     try {
       // Assign the credentials POST data to local variables
-      console.log(req.body)
-      const { username, email, password } = req.body
+      const { username, email, password, image } = req.body
 
       // Validate user data: Block duplicate emails------------
       const userMatch = await findUser(email)
@@ -46,16 +54,29 @@ module.exports = {
         return next(ApiError.badRequest('This email already exists'))
       }
 
+      // Upload image file to cloudinary
+      const filename = res.locals.filename;
+      // CLOUDINARY IMAGE UPLOAD SERVICE
+      const uploadResult = await cloudinaryImageUpload(filename);
+      downloadUrl = uploadResult.data.secure_url;
+
+    } catch(err) {
+      return next(ApiError.internal('An error occurred in uploading the image to storage', err))
+    }
+
+    // UPLOAD DOCUMENT TO FIRESTORE
+    try {
       // Save the new user to the db
       const usersRef = db.collection('users')
       const response = await usersRef.add({
         username: username,
         email: email,
         password: await hashPassword(password),
+        image: downloadUrl,
         isAdmin: false
       })
       // response from Firestore has an id
-      console.log(`User: ${response.id} registered!`)
+      debugAuth(`User: ${response.id} registered!`)
 
       // To automatically log in the user once registered--------------
       const userJSON = await userDetailsToJSON(response.id)
@@ -66,7 +87,7 @@ module.exports = {
       })
 
     } catch(err) {
-      return next(ApiError.internal('Your profile could not be registered at this time ...',err))
+      return next(ApiError.internal('Your profile could not be registered at this time ...', err))
     }
   },
 

@@ -26,7 +26,8 @@ module.exports = () => {
     FilePolicy.fileSizeLimiter,
     FilePolicy.fileExtLimiter(['.png','.jpg','.gif','.webp','.jpeg']),
     VerifyAuth.auth,
-    fileServerUpload],
+    fileServerUpload
+    ],
     ProductController.addProduct
   )
 

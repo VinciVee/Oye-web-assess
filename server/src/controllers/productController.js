@@ -12,8 +12,8 @@ module.exports = {
       // Store doc query
       const productsRef = db.collection('products')
 
-      // LIMIT QUERY
-      const snapshot = await productsRef.limit(20).get()
+      // SORT & LIMIT QUERY
+      const snapshot = await productsRef.orderBy("name","asc").limit(20).get()
 
       // SORT KEY QUERY #3 (compound)
       // const snapshot = await productsRef.where("category","==","painting").orderBy("name","desc").get()
@@ -23,7 +23,6 @@ module.exports = {
 
       // SORT KEY QUERY #1 (order)
       // const snapshot = await productsRef.orderBy("name","asc").get()
-
 
       // [400 ERROR] Check for no documents
       if(snapshot.empty){
@@ -111,18 +110,13 @@ module.exports = {
 
     let downloadUrl;
     try {
-      if(req.files){
+      if(req.files) {
         const filename = res.locals.filename;
 
         // CLOUDINARY IMAGE UPLOAD SERVICE
         const uploadResult = await cloudinaryImageUpload(filename);
         downloadUrl = uploadResult.data.secure_url;
 
-        if (req.body.oldImageId) {
-          debugWRITE(`Deleting old image in storage: ${req.body.oldImageId}`);
-          const deleteResult = await cloudinaryDeleteImage(req.body.oldImageId);
-          debugWRITE(deleteResult)
-        }
       } else {
         debugWRITE(`No change to image in DB`);
         downloadUrl = req.body.image;

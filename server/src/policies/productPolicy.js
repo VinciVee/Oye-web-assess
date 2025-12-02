@@ -5,7 +5,7 @@ const debugJoi = require('debug')('app:joi');
 module.exports = {
   // Validate POST products
   validateProduct(req, res, next){
-    console.log(req.body);
+    debugJoi(req.body);
     const schema = Joi.object({
       name: Joi.string().min(3).max(50).required(),
       description: Joi.string().min(3).max(2000).required(),
@@ -42,16 +42,15 @@ module.exports = {
           break
 
         case 'image':
-        case 'uploadedFile':
-          next(ApiError.badRequest('Invalid image URL/path... Please re-upload the image'))
+          next(ApiError.badRequest('Invalid image URL. Please re-upload the image'))
           break
 
         default:
           next(ApiError.badRequest('Invalid Form Information - please check form information and resubmit'))
       }
 
-    // ON SUCCSSS: We pass to next middleware
     } else {
+      // On success, pass to the next middleware
       next();
     }
   }

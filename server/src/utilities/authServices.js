@@ -21,6 +21,7 @@ module.exports = {
         username: doc.data().username,
         email: doc.data().email,
         password: doc.data().password,
+        image: doc.data().image,
         isAdmin: doc.data().isAdmin
       })
     })
