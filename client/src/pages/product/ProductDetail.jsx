@@ -6,7 +6,7 @@ import { Container, Spinner } from 'react-bootstrap';
 import * as styles from "./ProductDetail.css";
 import useAuth from '../../hooks/useAuth';
 import productService from '../../services/productService';
-import OyezCard from '../../components/common/OyezCard';
+import OyezForm from '../../components/common/OyezForm';
 import OyezLoader from '../../components/common/OyezLoader';
 import OyezButton from '../../components/common/OyezButton';
 import OyezLink from '../../components/common/OyezLink';
@@ -84,7 +84,7 @@ function ProductDetail() {
   const { name, description, image, price, category, isAvailable, onSale } = data
 
   return (
-    <OyezCard title="Product Details">
+    <OyezForm title="Product Details">
       {/* MAIN PRODUCT SECTION */}
       <div className={styles.productBox}>
         {/* IMAGE BOX: LEFT */}
@@ -124,7 +124,7 @@ function ProductDetail() {
           </div>}
         </div>
       </div>
-    </OyezCard>
+    </OyezForm>
   )
 }
 

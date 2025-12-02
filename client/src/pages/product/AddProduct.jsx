@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { Form, InputGroup, Row, Col, Spinner } from "react-bootstrap"
 
 import productService from "../../services/productService"
-import OyezCard from "../../components/common/OyezCard"
+import OyezForm from "../../components/common/OyezForm"
 import OyezButton from "../../components/common/OyezButton"
 
 function AddProduct() {
@@ -57,7 +57,7 @@ function AddProduct() {
   };
 
   return (
-    <OyezCard title="Add Product">
+    <OyezForm title="Add Product">
       <Form onSubmit={ handleSubmit }>
         {/* GROUP 1: NAME */}
         <Form.Group className="mb-3">
@@ -179,7 +179,7 @@ function AddProduct() {
           /> : 'Submit'}
         </OyezButton>
       </Form>
-    </OyezCard>
+    </OyezForm>
   )
 }
 

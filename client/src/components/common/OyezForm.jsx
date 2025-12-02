@@ -1,5 +1,11 @@
 import * as styles from './OyezForm.css'
 
+/**
+ * Form component to frame forms (login, register, edit and add products forms)
+ *
+ * @param {*} param0
+ * @returns
+ */
 const OyezForm = ({ title, authform, children }) => {
   return (
     <div className={styles.container}>

@@ -67,7 +67,7 @@ function ProductsPage() {
         }
       </ButtonToolbar>
 
-      <ProductsList products={products} />
+      <ProductsList products={data} />
     </Container>
   )
 }

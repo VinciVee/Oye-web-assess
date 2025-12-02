@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Form, InputGroup, Row, Col, Spinner } from "react-bootstrap"
+import { Form, InputGroup, Row, Col, Spinner, Container } from "react-bootstrap"
 
 import productService from "../../services/productService"
-import { getFileIdFromUrl } from '../../utils/writeUtils'
-import OyezCard from "../../components/common/OyezCard"
+import OyezForm from "../../components/common/OyezForm"
 import OyezButton from "../../components/common/OyezButton"
 import OyezLoader from "../../components/common/OyezLoader"
 
@@ -64,7 +63,7 @@ function EditProduct() {
       if (!response.data.image) {
         console.log('No downloadUrl provided from database')
       } else {
-        setOldImageId(dbProduct.image)
+        setOldImageId(response.data.image)
       }
 
     // (iii) CLEANUP FUNCTIONS
@@ -125,7 +124,7 @@ function EditProduct() {
   }
 
   return (
-    <OyezCard title="Edit Product Details">
+    <OyezForm title="Edit Product Details">
       <Form onSubmit={ handleSubmit }>
         {/* GROUP 1: NAME */}
         <Form.Group className="mb-3">
@@ -252,7 +251,7 @@ function EditProduct() {
           /> : 'Submit Changes'}
         </OyezButton>
       </Form>
-    </OyezCard>
+    </OyezForm>
   )
 }
 

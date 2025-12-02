@@ -1,6 +1,12 @@
 import OyezLink from '../common/OyezLink'
 import * as styles from './OyezBox.css'
 
+/**
+ * Box component used to display text and links on homepage
+ *
+ * @param {*} props
+ * @returns
+ */
 function OyezBox(props) {
   const { title, text, buttonPath, buttonText } = props
 

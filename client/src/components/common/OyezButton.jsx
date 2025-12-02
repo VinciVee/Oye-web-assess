@@ -2,6 +2,12 @@ import PropTypes from 'prop-types'
 import * as styles from './OyezButton.css'
 import { Button } from 'react-bootstrap'
 
+/**
+ * Button component to style bootstrap buttons
+ *
+ * @param {*} param0
+ * @returns
+ */
 const OyezButton = ({ children, loadingState, onClick, outline, navbar }) => {
   return (
     <Button
