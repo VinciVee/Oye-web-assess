@@ -4,8 +4,8 @@ import twColors from "tailwindcss/colors.js"
 export const root = createGlobalTheme(":root", {
   // Creating semantic tokens
   fonts: {
-    brand: "florante_at_lauraregular, apple-system, serif",
-    body: "Chivo Mono, apple-system, sans-serif"
+    brand: "quaerite_regnum_deiregular, apple-system, serif",
+    body: "DM Mono, apple-system, sans-serif"
   },
   colors: {
     // SEMANTIC TOKENS
