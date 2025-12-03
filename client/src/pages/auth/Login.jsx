@@ -48,7 +48,7 @@ function Login() {
 
   return (
     <OyezForm title="Log in" authform>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className={styles.formBox}>
         {/* EMAIL */}
         <FloatingLabel
           controlId="email"

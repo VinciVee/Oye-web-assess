@@ -12,8 +12,9 @@ export const titleBox = style({
 })
 
 export const titleText = style({
-  fontFamily: vars.fonts.body,
+  fontFamily: vars.fonts.brand,
   fontSize: vars.fontSizes.title1,
+  fontFeatureSettings: vars.fontFeatures.styleSet3,
   marginBottom: "0.5rem",
 })
 

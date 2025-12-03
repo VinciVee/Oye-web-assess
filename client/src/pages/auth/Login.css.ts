@@ -1,6 +1,10 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "../../styles/themes.css";
 
+export const formBox = style({
+  width: "90%",
+})
+
 export const userNav = style({
   marginTop: "1rem",
   paddingTop: "1rem",

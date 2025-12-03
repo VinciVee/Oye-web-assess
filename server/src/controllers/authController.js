@@ -1,6 +1,7 @@
 const { db } = require('../config/db')
 const ApiError = require('../utilities/ApiError')
 const { findUser, hashPassword, userDetailsToJSON, jwtSignUser, comparePassword } = require('../utilities/authServices')
+const { cloudinaryImageUpload } = require('../lib/cloudinaryImageUploadService')
 
 const debugAuth = require('debug')('app:auth')
 
@@ -42,10 +43,10 @@ module.exports = {
     debugAuth(res.locals)
 
     let downloadUrl;
+    const { username, email, password, image } = req.body
     // CHECK IF USER EXISTS AND UPLOAD IMAGE TO CLOUDINARY
     try {
       // Assign the credentials POST data to local variables
-      const { username, email, password, image } = req.body
 
       // Validate user data: Block duplicate emails------------
       const userMatch = await findUser(email)

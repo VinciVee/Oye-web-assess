@@ -7,6 +7,9 @@ export const root = createGlobalTheme(":root", {
     brand: "quaerite_regnum_deiregular, apple-system, serif",
     body: "DM Mono, apple-system, sans-serif"
   },
+  fontFeatures: {
+    styleSet3: '"ss03" 1, "kern" 1'
+  },
   colors: {
     // SEMANTIC TOKENS
     // 70% of the color - based on light/dark mode

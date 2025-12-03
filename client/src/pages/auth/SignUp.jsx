@@ -70,7 +70,7 @@ function SignUp() {
 
   return (
     <OyezForm title="Sign Up" authform>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className={styles.formBox}>
         {/* USERNAME */}
         <FloatingLabel
           controlId="username"

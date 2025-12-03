@@ -60,7 +60,7 @@ const Header = () => {
 
               {/* LOGGED IN */}
               {user && <OyezLink to='/dashboard'>Dashboard</OyezLink>}
-              {user && <OyezLink onClick={logout}>Logout</OyezLink>}
+              {user && <OyezButton onClick={logout}>Logout</OyezButton>}
             </Nav>
 
             {/* CART */}

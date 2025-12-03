@@ -11,7 +11,7 @@ const OyezForm = ({ title, authform, children }) => {
     <div className={styles.container}>
       <div className={`${styles.leadCard} ${authform ? styles.authForm : styles.generalForm}`}>
         <h2 className={styles.cardTitle}>{title}</h2>
-        <div>{children}</div>
+        <div className={styles.cardBody}>{children}</div>
       </div>
     </div>
   )

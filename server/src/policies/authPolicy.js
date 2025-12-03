@@ -7,13 +7,13 @@ module.exports = {
   validateAuth(req ,res, next){
     debugJoi(req.body)
     const schema = Joi.object({
-      username: Joi.string().min(3).max(50).alphanum().required(),
+      username: Joi.string().min(3).max(50).alphanum(),
       email: Joi.string().email({
         minDomainSegments: 2,
         tlds: {allow: ['com', 'net', 'au']}}).required(),
       password: Joi.string()
         .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
-      image: Joi.any().required()
+      image: Joi.any()
     });
 
     // Call the validate function to potentially return erros for bad data
