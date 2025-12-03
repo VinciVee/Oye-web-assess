@@ -2,11 +2,13 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '../../styles/themes.css';
 
 export const generalForm = style({
-  minWidth: "60vw"
+  width: "max(60vw, 1120px)",
+  margin: vars.space['3x'],
 })
 
 export const authForm = style({
-  minWidth: "25vw"
+  width: "min(40vw, 800px)",
+  margin: vars.space['3x'],
 })
 
 export const container = style({
@@ -22,8 +24,8 @@ export const leadCard = style({
   color: vars.colors.complementary,
   margin: "auto",
   padding: "2rem",
-  borderRadius: "1rem",
-  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
+  borderRadius: 3,
+  boxShadow: "rgba(0, 0, 0, 0.2) 0px 18px 50px -10px",
   textAlign: "center",
 })
 

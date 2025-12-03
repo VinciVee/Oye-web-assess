@@ -11,8 +11,8 @@ export const navContainer = style({
 
 export const navbarBrand = style({
   height: "2.8rem",
-  maxWidth: "70%",
-  paddingRight: vars.space["4x"],
+  width: "50%",
+  // paddingRight: vars.space["4x"],
 
   display: 'flex',
   gap: vars.space['2x'],
@@ -36,8 +36,7 @@ export const brandTitle = style({
 })
 
 export const navMenu = style({
-  display: "flex",
-  alignItems: "flex-start",
+  justifyContent: "flex-end",
 })
 
 export const toggleButton = style({

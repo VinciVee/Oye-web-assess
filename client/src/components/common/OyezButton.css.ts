@@ -9,13 +9,14 @@ export const button = style({
   border: `3px ${vars.colors.primary} solid`,
   borderStyle: "outset",
   textTransform: "uppercase",
-  fontFamily: vars.fonts.brand,
+  fontFamily: vars.fonts.body,
   fontWeight: vars.fontWeights.semiBold,
   textAlign: "center",
 
   ":hover": {
-    color: vars.colors.complementary,
+    color: vars.colors.grey600,
     backgroundColor: vars.colors.primary,
-    border: `3px ${vars.colors.complementary} solid`,
+    border: `3px ${vars.colors.grey600} solid`,
+    borderStyle: "outset",
   }
 })

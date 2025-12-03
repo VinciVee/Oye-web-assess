@@ -7,8 +7,8 @@ export const gridContainer = style({
 })
 
 export const productList = style({
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))",
+  display: "flex",
+  flexFlow: "row wrap",
   gap: vars.space["3x"],
   width: "100%",
   margin: "2rem auto"
