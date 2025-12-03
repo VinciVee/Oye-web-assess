@@ -2,12 +2,12 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '../../styles/themes.css';
 
 export const button = style({
-  margin: vars.space['1x'],
-  padding: vars.space['1x'],
+  padding: `${vars.space['1x']} ${vars.space['4x']}` ,
   color: vars.colors.primary,
   backgroundColor: vars.colors.complementary,
   borderRadius: 0,
-  border: `3px ${vars.colors.complementary} solid`,
+  border: `3px ${vars.colors.primary} solid`,
+  borderStyle: "outset",
   textTransform: "uppercase",
   fontFamily: vars.fonts.brand,
   fontWeight: vars.fontWeights.semiBold,

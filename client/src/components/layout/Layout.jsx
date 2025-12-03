@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { ToastContainer, Slide } from 'react-toastify';
+import { Container } from 'react-bootstrap';
 
 import * as styles from './Layout.css' // Import everything from this file (*) and store it in an object called 'styles'
 import Header from './Header'
@@ -24,10 +25,10 @@ const Layout = () => (
     />
     <Header />
     {/* Wrap all content in column-direction flexbox */}
-    <div className={styles.appContent}>
+    <main>
       {/* {props.children} */}
       <Outlet />
-    </div>
+    </main>
     <Footer />
   </div>
 );

@@ -8,7 +8,7 @@ import productService from '../../services/productService';
 import ProductsList from "../../components/features/products/ProductsList"
 import OyezLoader from '../../components/common/OyezLoader';
 import OyezLink from '../../components/common/OyezLink'
-import * as styles from './OnSalePage.css'
+import OyezTitleBox from '../../components/common/OyezTitleBox';
 
 function OnSalePage() {
   const { user } = useAuth()
@@ -60,9 +60,12 @@ function OnSalePage() {
 
   return (
     <Container>
-      <h1>Oyez Oyez Store</h1>
-      <p>On sale products</p>
-      <OyezLink to='/store/products'>All Products</OyezLink>
+      <OyezTitleBox
+        title='Oyez Oyez Store'
+        text='On sale products'
+      >
+        <OyezLink to='/store/products'>All Products</OyezLink>
+      </OyezTitleBox>
 
       <ProductsList products={products} />
     </Container>

@@ -7,6 +7,7 @@ import * as styles from './Header.css';
 import logoImg from '../../assets/images/oyez-oyez-logo.svg'
 import useAuth from "../../hooks/useAuth"
 import OyezLink from '../common/OyezLink';
+import OyezButton from '../common/OyezButton'
 
 
 const Header = () => {
@@ -22,56 +23,57 @@ const Header = () => {
         setExpanded(false);
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
-    <Navbar
-      className={styles.navbar}
-      ref={navRef}
-      expanded={expanded}
-      onToggle={() => setExpanded(!expanded)}
-      variant="light"
-      collapseOnSelect
-      expand="lg"
-      sticky="top"
-    >
-      <Container>
-        {/* NEW IMAGE LOGO & TEXT */}
-        <Navbar.Brand className={styles.brandLink} as={Link} to='/'>
-          <img className={styles.logo} src={logoImg} alt="oyez oyez logo" />
-          <div className={styles.logoTextBox}>
+    <header>
+      <Navbar
+        ref={navRef}
+        expanded={expanded}
+        onToggle={() => setExpanded(!expanded)}
+        collapseOnSelect
+        expand="lg"
+        fixed="top"
+      >
+        <Container className={styles.navContainer}>
+          {/* IMAGE LOGO & TEXT */}
+          <Navbar.Brand className={styles.navbarBrand} >
+            <Link to='/'>
+              <img className={styles.logo} src={logoImg} alt="oyez oyez logo" />
+            </Link>
             <span className={styles.brandTitle}>All things medieval</span>
-          </div>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
-        <Navbar.Collapse id='responsive-navbar-nav'>
-          {/* STANDARD NAVLINKS */}
-          <Nav className='me-auto'>
-            <Nav.Link
-              className={styles.navLink}
-              as={Link}
-              to='/store/products'
-              eventKey='products'
-            >Products</Nav.Link>
-          </Nav>
-          {/* AUTH NAVLINKS */}
-          <Nav className={styles.navMenu}>
+          </Navbar.Brand>
 
-            {/* LOGGED OUT */}
-            {!user && <OyezLink to='/login'>Login</OyezLink>}
-            {!user && <OyezLink to='/signup'>Sign Up</OyezLink>}
+          {/* LINKS */}
+          <Navbar.Toggle aria-controls='responsive-navbar-nav' className={styles.toggleButton}/>
+          <Navbar.Collapse id='responsive-navbar-nav'>
+            {/* AUTH NAVLINKS */}
+            <Nav className={styles.navMenu}>
+              {/* STANDARD NAVLINKS */}
+              <OyezLink to='/store/products'>Products</OyezLink>
 
-            {/* LOGGED IN */}
-            {user && <Nav.Link className={styles.navLink} as={Link} to='/dashboard' eventKey='dashboard'>Dashboard</Nav.Link>}
-            {user && <Nav.Link  className={styles.navLink} onClick={logout} eventKey='logout'>Logout</Nav.Link>}
-            <button><RiShoppingCartFill /></button>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+              {/* LOGGED OUT */}
+              {!user && <OyezLink to='/login'>Login</OyezLink>}
+              {!user && <OyezLink to='/signup'>Sign Up</OyezLink>}
+
+              {/* LOGGED IN */}
+              {user && <OyezLink to='/dashboard'>Dashboard</OyezLink>}
+              {user && <OyezLink onClick={logout}>Logout</OyezLink>}
+            </Nav>
+
+            {/* CART */}
+            <OyezButton><RiShoppingCartFill /></OyezButton>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <img
+        src="/src/assets/images/ani-adigyozalyan-hero-unsplash.webp"
+        alt='a hill'
+        className={styles.heroDiv}
+      />
+    </header>
   )
 }
 

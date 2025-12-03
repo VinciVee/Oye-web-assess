@@ -9,7 +9,7 @@ import productService from '../../services/productService';
 import ProductsList from "../../components/features/products/ProductsList"
 import OyezLoader from '../../components/common/OyezLoader';
 import OyezLink from '../../components/common/OyezLink'
-import * as styles from './ProductsPage.css'
+import OyezTitleBox from "../../components/common/OyezTitleBox";
 
 function ProductsPage() {
   const { user } = useAuth()
@@ -57,15 +57,15 @@ function ProductsPage() {
 
   return (
     <Container>
-      <h1>Oyez Oyez Store</h1>
-      <p>Products</p>
-
-      <ButtonToolbar className='mb-3' aria-label='product list filter options' >
-        <OyezLink to='/store/sales'>On Sale</OyezLink>
-        { user &&
-          <OyezLink to='/store/product/add'>Add Product</OyezLink>
-        }
-      </ButtonToolbar>
+      <OyezTitleBox
+        title='Oyez Oyez Store'
+        text='Products'
+      >
+        <ButtonToolbar className='mb-3' aria-label='product list filter options' >
+          <OyezLink to='/store/sales'>On Sale</OyezLink>
+          { user && <OyezLink to='/store/product/add'>Add Product</OyezLink>}
+        </ButtonToolbar>
+      </OyezTitleBox>
 
       <ProductsList products={data} />
     </Container>

@@ -3,13 +3,13 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Container, Spinner } from 'react-bootstrap';
 
 // Local modules
-import * as styles from "./ProductDetail.css";
 import useAuth from '../../hooks/useAuth';
 import productService from '../../services/productService';
 import OyezForm from '../../components/common/OyezForm';
 import OyezLoader from '../../components/common/OyezLoader';
 import OyezButton from '../../components/common/OyezButton';
 import OyezLink from '../../components/common/OyezLink';
+import * as styles from "./ProductDetail.css";
 
 function ProductDetail() {
   // CUSTOM HOOKS
