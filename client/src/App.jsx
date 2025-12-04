@@ -7,7 +7,6 @@ import Login from './pages/auth/Login';
 import SignUp from './pages/auth/SignUp';
 import Dashboard from './pages/auth/Dashboard';
 import ProductsPage from './pages/product/ProductsPage';
-import GithubMenu from './pages/apis/GithubMenu';
 import NotFound from './pages/NotFound';
 import PrivateRoutes from './components/layout/PrivateRoutes';
 import AddProduct from './pages/product/AddProduct';
@@ -47,8 +46,6 @@ function App() {
           <Route path='dashboard' element={<Dashboard />} />
         </Route>
 
-        {/* GITHUB */}
-        {/* <Route path='github' element={<GithubMenu />} /> */}
         {/* ERROR PAGES */}
         <Route path="*" element={<NotFound />} />
       </Route>

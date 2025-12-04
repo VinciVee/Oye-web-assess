@@ -101,7 +101,7 @@ function ProductDetail() {
           </div>
 
           {/* AUTH LINKS: EDIT & DELETE */}
-          {user && <div>
+          {user.isAdmin && <div>
             <OyezLink
               to={`/store/product/edit/${id}`}
             >Edit
