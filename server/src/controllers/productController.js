@@ -54,7 +54,7 @@ module.exports = {
   async getOnSaleProducts(req, res, next){
     try {
       const productRef = db.collection('products');
-      // Added search query
+      // Search query
       const snapshot = await productRef.where("onSale", "==", true).orderBy("name", "asc").limit(20).get()
 
       // [400 ERROR] Check for User Asking for Non-Existent Documents

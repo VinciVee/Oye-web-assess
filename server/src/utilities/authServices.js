@@ -57,7 +57,7 @@ module.exports = {
   jwtSignUser(user){
     const payload = user
     const secret = config.authentication.jwtSecret
-    const tokenExpireTime = 60 * 60 * 24 // Time To Live (TTL) - 24 hrs in seconds
+    const tokenExpireTime = 60 * 60 * 24          // Time To Live (TTL) - 24 hrs in seconds
 
     const token = jwt.sign(
       payload,

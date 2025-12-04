@@ -5,6 +5,7 @@ import { Form, InputGroup, Row, Col, Spinner, Container } from "react-bootstrap"
 import productService from "../../services/productService"
 import OyezForm from "../../components/common/OyezForm"
 import OyezButton from "../../components/common/OyezButton"
+import OyezLoader from "../../components/common/OyezLoader"
 
 function EditProduct() {
   // CUSTOM HOOKS
@@ -117,7 +118,7 @@ function EditProduct() {
   if (loading) {
     return (
       <Container>
-        <TuLoader />
+        <OyezLoader />
       </Container>
     )
   }

@@ -63,7 +63,7 @@ function ProductsPage() {
       >
         <ButtonToolbar className='mb-3' aria-label='product list filter options' >
           <OyezLink to='/store/sales'>On Sale</OyezLink>
-          { user && <OyezLink to='/store/product/add'>Add Product</OyezLink>}
+          { user.isAdmin && <OyezLink to='/store/product/add'>Add Product</OyezLink>}
         </ButtonToolbar>
       </OyezTitleBox>
 
