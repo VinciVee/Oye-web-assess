@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode'
 import { setHeaderToken } from '../services/api'
 
 // Create the context
-const AuthContext = createContext()
+const AuthContext = createContext({})
 
 // Define the context (which includes returning a "provider" component)
 export function AuthProvider({ children }){
@@ -53,7 +53,6 @@ export function AuthProvider({ children }){
     setHeaderToken()
     navigate('/login')
   }
-
 
   // All properties will be contained in a "value" prop
   const value = {

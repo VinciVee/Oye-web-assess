@@ -1,4 +1,3 @@
-// import { useState, useEffect } from 'react';
 import { useQuery } from "@tanstack/react-query"
 import { Link } from 'react-router-dom';
 import { Container, ButtonToolbar, } from "react-bootstrap";
@@ -12,7 +11,7 @@ import OyezLink from '../../components/common/OyezLink'
 import OyezTitleBox from "../../components/common/OyezTitleBox";
 
 function ProductsPage() {
-  const { user } = useAuth()
+  const { user, userLoading } = useAuth()
 
   // TanStack: Data Fetch onMount
   const { isPending, isError, data, error } = useQuery({
@@ -30,14 +29,11 @@ function ProductsPage() {
       // setProducts(data)
     } catch(err) {
       throw err; // will be handled by useQuery
-      // setError(true)
-    } finally {
-      // setLoading(false)
     }
   }
 
   // CONDITIONAL LOAD: LOADING
-  if (isPending) {
+  if (isPending || userLoading ) {
     return (
       <Container className="text-center">
         <OyezLoader />
@@ -63,7 +59,7 @@ function ProductsPage() {
       >
         <ButtonToolbar className='mb-3' aria-label='product list filter options' >
           <OyezLink to='/store/sales'>On Sale</OyezLink>
-          { user.isAdmin && <OyezLink to='/store/product/add'>Add Product</OyezLink>}
+          { user?.isAdmin && <OyezLink to='/store/product/add'>Add Product</OyezLink> }
         </ButtonToolbar>
       </OyezTitleBox>
 
